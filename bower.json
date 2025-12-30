@@ -1,0 +1,26 @@
+{
+  "name": "Naivikt",
+  "homepage": "https://github.com/rush1404",
+  "authors": [
+    "rush1404"
+  ],
+  "description": "Company",
+  "main": "index.html",
+  "keywords": [
+    "material",
+    "design",
+    "bootstrap",
+    "material",
+    "design",
+    "google",
+    "twitter"
+  ],
+  "license": "Rush",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

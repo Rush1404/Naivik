@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>Naivik | Digital Transformation</title>
+  
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link id="pagestyle" href="../assets/css/material-kit.css?v=3.1.0" rel="stylesheet" />
+
+  <style>
+    .navbar-brand.tracking-widest {
+      letter-spacing: 0.3rem; /* Spaced out letters for a premium look */
+      font-size: 1.2rem;
+      font-family: 'Inter', sans-serif;
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+    }
+
+    .navbar-brand.tracking-widest:hover {
+      opacity: 1;
+    }
+
+    :root {
+      --baby-blue: #89CFF0;
+      --soft-blue-gradient: linear-gradient(135deg, #fdfcfd 0%, #eef6ff 100%);
+      --hero-gradient: linear-gradient(135deg, #f3f0ff 0%, #e1f5fe 100%); /* Symphona-style light pastel */
+      --text-dark: #2d3436;
+    }
+
+    body { 
+      background-color: #ffffff; 
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* Background Splatters */
+    .bg-splatter {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(137, 207, 240, 0.15) 0%, transparent 70%);
+      filter: blur(60px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Light Floating Hero Card */
+    .hero-card-light {
+      background: var(--hero-gradient);
+      border-radius: 32px;
+      border: 1px solid rgba(137, 207, 240, 0.3);
+      box-shadow: 0 40px 80px rgba(137, 207, 240, 0.15);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Darker Text for Light Backgrounds */
+    .text-naivik-dark { color: #1e293b; }
+    .text-naivik-muted { color: #64748b; }
+
+    /* The Grid Cards in Light Mode */
+    .glow-card-inner-light {
+      position: absolute;
+      inset: 1px;
+      background-color: #ffffff;
+      border-radius: 15px;
+      z-index: 2;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .glow-card-wrapper-light {
+      background-color: #e2e8f0;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    /* --- New Partner Carousel Styles --- */
+
+    /* The section background should be white now */
+    .bg-white { background-color: #ffffff !important; }
+
+    /* Heading style matching reference */
+    .section-heading-dark {
+        color: #1e293b; /* Dark slate color */
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    /* The container that hides overflowing logos */
+    .marquee-viewport {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        padding: 1rem 0; /* Space for shadows */
+    }
+
+
+    /* The track that holds all cards and moves */
+    .marquee-track {
+        display: flex;
+        width: max-content; /* Ensures single line */
+        /* Adjust time (40s) to speed up or slow down */
+        animation: scrollMarquee 40s linear infinite;
+    }
+
+    /* The individual logo card style based on reference image */
+    .partner-card {
+        /* Light gray background from reference */
+        background-color: #F3F5F7; 
+        border-radius: 16px;
+        /* Fixed dimensions to ensure 5 fit nicely on standard desktops */
+        width: 220px; 
+        height: 100px;
+        /* Spacing between cards */
+        margin-right: 24px;
+        /* Flex layout to center logo */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        flex-shrink: 0; /* Prevents squishing */
+    }
+
+    /* Styling placeholders since we don't have real SVGs */
+    .partner-placeholder {
+        font-weight: 700;
+        color: #5f6d7a; /* Muted gray text */
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* The animation that moves the track left */
+    @keyframes scrollMarquee {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            /* Move left by the total width of the ORIGINAL 10 items + gaps. 
+              Calculation: (220px card + 24px gap) * 10 items = 2440px */
+            transform: translateX(-2440px); 
+        }
+    }
+
+    /* --- New Integration Hub Graphic Styles --- */
+
+    /* The main container for the graphic */
+    .integration-hub-container {
+      position: relative;
+      /* The requested baby blue gradient background */
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      border-radius: 24px;
+      padding: 3rem;
+      aspect-ratio: 1 / 1; /* Makes it a perfect square */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* The central Naivik hub */
+    .hub-center {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      background: #ffffff;
+      border-radius: 50%;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(137, 207, 240, 0.4);
+      border: 3px solid #89CFF0; /* Baby blue border */
+    }
+
+    /* The glowing 'N' inside the center */
+    .hub-logo-text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 900;
+      font-size: 3rem;
+      background: linear-gradient(to bottom right, #89CFF0, #0056b3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Styles for the surrounding satellite icons */
+    .satellite {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 11;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .satellite:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 25px rgba(137, 207, 240, 0.3);
+    }
+
+    .satellite i {
+      font-size: 1.5rem;
+      color: #555; /* Default icon color */
+    }
+
+    /* Positioning the satellites in a circle */
+    /* Top-ish */
+    .s-1 { top: 15%; left: 50%; transform: translateX(-50%); }
+    /* Top-Right */
+    .s-2 { top: 30%; right: 15%; }
+    /* Bottom-Right */
+    .s-3 { bottom: 30%; right: 15%; }
+    /* Bottom-ish */
+    .s-4 { bottom: 15%; left: 50%; transform: translateX(-50%); }
+    /* Bottom-Left */
+    .s-5 { bottom: 30%; left: 15%; }
+    /* Top-Left */
+    .s-6 { top: 30%; left: 15%; }
+
+
+    /* The SVG lines connecting everything */
+    .hub-lines {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 90%;
+      height: 90%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* --- Staggered Solutions Section Styles --- */
+
+    /* The main section background */
+    .bg-baby-blue-gradient {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    }
+
+    /* Custom class to stagger the second column */
+    @media (min-width: 992px) {
+        .staggered-col {
+            margin-top: 120px; /* Adjust this value to control the offset */
+        }
+    }
+
+    /* The solution card container */
+    .solution-card {
+        background-color: #ffffff;
+        border-radius: 24px;
+        overflow: hidden; /* Ensures image corners are clipped */
+        box-shadow: 0 20px 40px rgba(137, 207, 240, 0.15);
+        height: auto; /* Allow height to adjust to content */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* The header part with the image */
+    .solution-card-header {
+        /* The image itself provides the background */
+        padding: 0; 
+        position: relative;
+        /* Key style: Rounding the bottom of the header to meet the white body */
+        border-bottom-left-radius: 24px;
+        border-bottom-right-radius: 24px;
+        overflow: hidden; /* Clip the image */
+    }
+
+    /* The diagram image inside the header */
+    .solution-diagram {
+        width: 100%;
+        height: auto;
+        display: block;
+        /* The image itself is already rounded at the bottom, but this ensures */
+        /* it fits perfectly within the header's border-radius */
+        border-bottom-left-radius: 24px;
+        border-bottom-right-radius: 24px;
+    }
+
+    /* The white body with text */
+    .solution-card-body {
+        padding: 2.5rem;
+    }
+
+    .solution-title {
+        color: #1e293b; /* text-naivik-dark */
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .solution-text {
+        color: #64748b; /* text-naivik-muted */
+        line-height: 1.6;
+    }
+
+    .solution-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bg-gradient-dark-blue {
+      background: linear-gradient(180deg, #000000 0%, #0a192f 100%);
+    }
+
+    .bg-mist-overlay {
+      background: radial-gradient(circle at 50% 50%, rgba(10, 25, 47, 0.6) 0%, rgba(0, 0, 0, 0) 70%);
+      filter: blur(40px);
+      opacity: 0.7;
+    }
+
+    .icon-box {
+      width: 64px;
+      height: 64px;
+      background: rgba(10, 25, 47, 0.8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(137, 207, 240, 0.1);
+    }
+
+    .bg-rounded {
+      border-radius: 48px;
+    }
+
+    /* --- Services 2x2 Grid Styles --- */
+    .service-card {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      transition: transform 0.3s ease;
+      height: 100%;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-image-header {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    .service-content {
+      padding: 2rem;
+    }
+
+    /* --- Corrected Checkmark Styles --- */
+    .check-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 1.5rem;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.2rem;
+    }
+
+    .check-icon {
+      /* Using your Baby Blue #89CFF0 */
+      color: #89CFF0 !important; 
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      margin-right: 12px;
+      /* Ensuring visibility */
+      display: inline-block;
+      min-width: 24px;
+      line-height: 1;
+    }
+
+    .check-text {
+      font-size: 0.95rem;
+      color: #4a5568;
+      line-height: 1.5;
+      margin-top: 2px;
+    }
+
+    /* --- Final CTA Section Styles --- */
+
+    /* The section background with external flowing lines */
+    .cta-section-bg {
+      background-color: #ffffff;
+      position: relative;
+      overflow: hidden;
+      padding: 5rem 0;
+    }
+
+    .external-waves {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 600px;
+      height: auto;
+      opacity: 0.3;
+      pointer-events: none;
+      /* Color the external waves baby blue */
+      fill: none;
+      stroke: #89CFF0;
+      stroke-width: 2;
+    }
+
+    /* The Main Floating Card Wrapper */
+    .cta-card-wrapper {
+      /* Dark Blue to Black gradient */
+      background: linear-gradient(135deg, #0a192f 0%, #000000 80%);
+      border-radius: 30px;
+      /* Subtle glowing border */
+      border: 1px solid rgba(137, 207, 240, 0.3);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Left Side: Content & Internal Waves */
+    .cta-content-side {
+      padding: 4rem 3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Internal wavy lines pattern */
+    .internal-waves-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.15;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 C 25 60, 50 40, 100 50' stroke='%2389CFF0' stroke-width='1' fill='none'/%3E%3Cpath d='M0 30 C 25 40, 50 20, 100 30' stroke='%2389CFF0' stroke-width='1' fill='none'/%3E%3Cpath d='M0 70 C 25 80, 50 60, 100 70' stroke='%2389CFF0' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+
+    /* Right Side: Image Framing */
+    .cta-image-side {
+      position: relative;
+      min-height: 400px;
+      /* Ensures the image elements can extend outside this container */
+      overflow: visible; 
+    }
+
+    /* The solid colored frame behind the image (Baby Blue) */
+    .image-frame-bg {
+      position: absolute;
+      top: -30px;  /* Extends slightly above card container */
+      right: -30px; /* Extends slightly right of card container */
+      bottom: 30px;
+      left: 30px;
+      background-color: #89CFF0; /* Naivik Baby Blue */
+      border-radius: 30px;
+      z-index: 1;
+    }
+
+    /* The actual photo */
+    .cta-photo {
+      position: absolute;
+      /* Positioned relative to the frame to create the overlap effect */
+      top: 30px;
+      right: 30px;
+      bottom: -30px; /* Extends below the card container */
+      left: 0;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      object-fit: cover;
+      border-radius: 24px;
+      z-index: 2;
+      box-shadow: -10px 10px 30px rgba(0,0,0,0.3);
+    }
+
+    /* Responsive adjust for mobile so image stacks nicely */
+    @media (max-width: 991.98px) {
+      .cta-image-side {
+        min-height: 350px;
+        margin-top: 2rem;
+        /* Reset overlapping on mobile so it doesn't break layout */
+        overflow: hidden; 
+        border-radius: 0 0 30px 30px;
+      }
+      .image-frame-bg {
+          top: 0; right: 0; bottom: 0; left: 0;
+          border-radius: 0;
+      }
+      .cta-photo {
+          position: relative;
+          top: auto; right: auto; bottom: auto; left: auto;
+          width: 100%; height: 100%;
+          border-radius: 0;
+          margin: 20px;
+      }
+    }
+
+    /* --- Naivik Light Footer Styles --- */
+
+    .bg-light-glass {
+        background: rgba(137, 207, 240, 0.05);
+        backdrop-filter: blur(5px);
+    }
+
+    .bg-splatter-light {
+        position: absolute;
+        background: radial-gradient(circle, rgba(137, 207, 240, 0.3) 0%, transparent 70%);
+        filter: blur(50px);
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .footer-link-light {
+        color: #64748b;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+    }
+
+    .footer-link-light:hover {
+        color: #89CFF0; /* Baby Blue */
+        padding-left: 5px;
+    }
+
+    .icon-box-sm-light {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8fafc;
+        color: #64748b;
+        border-radius: 50%;
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+    }
+
+    .icon-box-sm-light:hover {
+        background: #89CFF0;
+        color: #fff;
+        border-color: #89CFF0;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(137, 207, 240, 0.3);
+    }
+
+    .status-dot-light {
+        width: 8px;
+        height: 8px;
+        background-color: #00d2ff;
+        border-radius: 50%;
+        display: inline-block;
+        box-shadow: 0 0 8px rgba(0, 210, 255, 0.5);
+        animation: pulse-blue-light 2s infinite;
+    }
+
+    @keyframes pulse-blue-light {
+        0% { transform: scale(0.9); opacity: 0.6; }
+        70% { transform: scale(1.1); opacity: 1; }
+        100% { transform: scale(0.9); opacity: 0.6; }
+    }
+
+    /* Ensure typography matches Naivik brand */
+    .text-naivik-dark { color: #1e293b; }
+    .text-naivik-muted { color: #64748b; }
+  </style>
+</head>
+
+<body>
+  <div id="blue-mist"></div>
+
+  <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3 navbar-transparent">
+    <div class="container">
+      <a class="navbar-brand font-weight-bolder text-black tracking-widest text-uppercase" href="../index.html" rel="tooltip" title="Naivik Home" data-placement="bottom">
+        Naivik
+      </a>
+      
+      <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon mt-2">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </span>
+      </button>
+
+      <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
+        <ul class="navbar-nav navbar-nav-hover ms-auto align-items-center">
+          <li class="nav-item mx-2">
+            <a class="nav-link ps-2 text-dark" href="../index.html">Home</a>
+          </li>
+
+          <li class="nav-item mx-2">
+            <a class="nav-link ps-2 text-dark" href="services.html">Services</a>
+          </li>
+
+          <li class="nav-item dropdown dropdown-hover mx-2">
+            <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-dark" id="dropdownIndustries" data-bs-toggle="dropdown" aria-expanded="false">
+              Industries
+              <img src="../assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-2 d-lg-block d-none">
+            </a>
+            <div class="dropdown-menu dropdown-menu-animation dropdown-md p-3 border-radius-lg mt-0 mt-lg-3" aria-labelledby="dropdownIndustries">
+              <a href="industries.html" class="dropdown-item border-radius-md">Healthcare</a>
+              <a href="#" class="dropdown-item border-radius-md">Finance & Banking</a>
+              <a href="#" class="dropdown-item border-radius-md">Retail & E-commerce</a>
+              <a href="#" class="dropdown-item border-radius-md">Manufacturing</a>
+            </div>
+          </li>
+
+          <li class="nav-item mx-2">
+            <a class="nav-link ps-2 text-dark" href="about-us.html">About Us</a>
+          </li>
+
+          <li class="nav-item my-auto ms-3">
+            <a href="contact-us.html" class="btn btn-sm bg-gradient-info mb-0 shadow-info px-4 py-2">
+              Contact Us
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- DIGITAL TRANSFORMATION (floating box) -->
+  <header class="position-relative py-8">
+    <div class="bg-splatter" style="top: -10%; left: -5%;"></div>
+    <div class="bg-splatter" style="top: 20%; right: -10%;"></div>
+
+    <div class="container mt-5">
+      <div class="hero-card-light">
+        <div class="row g-0">
+          
+          <div class="col-lg-7 p-5 p-md-7 d-flex flex-column justify-content-center">
+            <h6 class="text-info font-weight-bolder text-uppercase tracking-widest mb-3">
+              Digital Transformation
+            </h6>
+            <h1 class="text-naivik-dark display-4 font-weight-bolder mb-4">
+              Don't Leave Your Customers <br><span class="text-info">in the Dark</span>
+            </h1>
+            <p class="text-naivik-muted lead mb-5">
+              Start using Naivik today and see the power of AI-powered automation. We bridge the gap between complex legacy systems and future-ready efficiency.
+            </p>
+            <div class="d-flex flex-wrap gap-3">
+              <button class="btn bg-gradient-info rounded-pill px-4 py-3 shadow-sm text-white">Book Free Consultation</button>
+              <button class="btn btn-outline-info rounded-pill px-4 py-3">Learn More About Naivik</button>
+            </div>
+          </div>
+
+          <div class="col-lg-5 position-relative d-none d-lg-block">
+            <div class="h-100" style="background: url('https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;">
+              <div class="position-absolute top-0 start-0 h-100 w-25" style="background: linear-gradient(to right, #e1f5fe, transparent);"></div>
+            </div>
+            
+            <div class="position-absolute top-50 start-0 translate-middle-y" style="margin-left: -30px;">
+              <svg width="80" height="240" viewBox="0 0 80 240" fill="none">
+                <path d="M10 0C50 80 50 160 10 240" stroke="#89CFF0" stroke-width="2" opacity="0.4"/>
+                <path d="M25 20C60 90 60 150 25 220" stroke="#89CFF0" stroke-width="1" opacity="0.2"/>
+              </svg>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- LOGO CAROUSEL -->
+  <section class="py-6 bg-white">
+    <div class="container-fluid px-0"> <div class="row">
+        <div class="col-12">
+          <h3 class="section-heading-dark">
+            Trusted Around The World By Our Partners & Clients
+          </h3>
+        </div>
+      </div>
+
+      <div class="marquee-viewport">
+        <div class="marquee-track">
+          
+          <div class="partner-card">
+              <span class="partner-placeholder" style="color: #4b286d;">TELUS</span>
+          </div>
+          <div class="partner-card">
+              <span class="partner-placeholder" style="color: #da291c;">ROGERS</span>
+          </div>
+          <div class="partner-card">
+              <span class="partner-placeholder" style="color: #00539b;">RBC</span>
+          </div>
+          <div class="partner-card">
+              <span class="partner-placeholder" style="color: #96bf0d;">TD Bank</span>
+          </div>
+          <div class="partner-card">
+              <span class="partner-placeholder" style="color: #000000;">Loblaws</span>
+          </div>
+          <div class="partner-card">
+              <span class="partner-placeholder" style="color: #003da5;">Bell</span>
+          </div>
+          <div class="partner-card">
+              <span class="partner-placeholder" style="color: #95bf4b;">Shopify</span>
+          </div>
+          <div class="partner-card">
+              <span class="partner-placeholder" style="color: #00a758;">Manulife</span>
+          </div>
+          <div class="partner-card">
+              <span class="partner-placeholder" style="color: #ffb81c;">Sun Life</span>
+          </div>
+          <div class="partner-card">
+              <span class="partner-placeholder" style="color: #c41230;">Magna</span>
+          </div>
+
+          <div class="partner-card"><span class="partner-placeholder" style="color: #4b286d;">TELUS</span></div>
+          <div class="partner-card"><span class="partner-placeholder" style="color: #da291c;">ROGERS</span></div>
+          <div class="partner-card"><span class="partner-placeholder" style="color: #00539b;">RBC</span></div>
+          <div class="partner-card"><span class="partner-placeholder" style="color: #96bf0d;">TD Bank</span></div>
+          <div class="partner-card"><span class="partner-placeholder" style="color: #000000;">Loblaws</span></div>
+          <div class="partner-card"><span class="partner-placeholder" style="color: #003da5;">Bell</span></div>
+          <div class="partner-card"><span class="partner-placeholder" style="color: #95bf4b;">Shopify</span></div>
+          <div class="partner-card"><span class="partner-placeholder" style="color: #00a758;">Manulife</span></div>
+          <div class="partner-card"><span class="partner-placeholder" style="color: #ffb81c;">Sun Life</span></div>
+          <div class="partner-card"><span class="partner-placeholder" style="color: #c41230;">Magna</span></div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEMS AND BENEFITS -->
+  <section class="py-6 bg-white overflow-hidden">
+    <div class="container">
+      <div class="row justify-content-center text-center mb-5">
+        <div class="col-lg-8">
+          <h6 class="text-info font-weight-bolder text-uppercase tracking-widest mb-3">Problems & Benefits</h6>
+          <h1 class="text-naivik-dark mb-4">Streamline Your Office Processes With AI-Powered Automation</h2>
+        </div>
+      </div>
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-lg-0 mb-5 pe-lg-5">
+          <p class="text-naivik-muted opacity-8 mb-4">
+            For modern enterprises, keeping services operational 24/7 is a requirement. 
+            A critical part of this is having top-tier architectural oversight and field management teams to quickly identify and address outages.
+          </p>
+          <p class="text-naivik-muted opacity-8 mb-4">
+            Naivik provides the tools that can help modernize your IT department without ballooning costs. 
+            With our no-code AI automation tools, your teams can streamline customer service, support, and fulfillment to reduce operational costs effectively.
+          </p>
+          <button class="btn btn-link text-info p-0 font-weight-bold">Learn more about our framework <i class="fas fa-arrow-right ms-2"></i></button>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="integration-hub-container">
+            <svg class="hub-lines" viewBox="0 0 400 400">
+              <circle cx="200" cy="200" r="130" stroke="#89CFF0" stroke-width="2" fill="none" stroke-dasharray="8 8" opacity="0.5" />
+              <line x1="200" y1="200" x2="200" y2="70" stroke="#89CFF0" stroke-width="2" stroke-dasharray="5 5" opacity="0.5" />
+              <line x1="200" y1="200" x2="312" y2="135" stroke="#89CFF0" stroke-width="2" stroke-dasharray="5 5" opacity="0.5" />
+              <line x1="200" y1="200" x2="312" y2="265" stroke="#89CFF0" stroke-width="2" stroke-dasharray="5 5" opacity="0.5" />
+              <line x1="200" y1="200" x2="200" y2="330" stroke="#89CFF0" stroke-width="2" stroke-dasharray="5 5" opacity="0.5" />
+              <line x1="200" y1="200" x2="88" y2="265" stroke="#89CFF0" stroke-width="2" stroke-dasharray="5 5" opacity="0.5" />
+              <line x1="200" y1="200" x2="88" y2="135" stroke="#89CFF0" stroke-width="2" stroke-dasharray="5 5" opacity="0.5" />
+            </svg>
+
+            <div class="hub-center">
+              <span class="hub-logo-text">N</span>
+            </div>
+            
+            <div class="satellite s-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Cloud Infrastructure">
+              <i class="fas fa-cloud text-info"></i>
+            </div>
+            <div class="satellite s-2" data-bs-toggle="tooltip" data-bs-placement="right" title="Database Management">
+              <i class="fas fa-database" style="color: #e74c3c;"></i>
+            </div>
+            <div class="satellite s-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Communication Tools">
+              <i class="fab fa-slack" style="color: #E01E5A;"></i>
+            </div>
+            <div class="satellite s-4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Analytics & Reporting">
+              <i class="fas fa-chart-line" style="color: #27ae60;"></i>
+            </div>
+            <div class="satellite s-5" data-bs-toggle="tooltip" data-bs-placement="left" title="Development/Code">
+              <i class="fas fa-code" style="color: #f39c12;"></i>
+            </div>
+            <div class="satellite s-6" data-bs-toggle="tooltip" data-bs-placement="left" title="CRM / Sales">
+              <i class="fas fa-users-cog" style="color: #0056b3;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   <!-- SOLUTIONS AND FEATURES (staggered info boxes that are layered 50% lower than it predecesor) -->
+  <section class="py-6 bg-white overflow-hidden">
+    <div class="container">
+      
+      <div class="row text-center mb-6">
+        <div class="col-lg-8 mx-auto">
+          <h6 class="text-info font-weight-bolder text-uppercase tracking-widest mb-3">Our Solutions</h6>
+          <h2 class="text-naivik-dark mb-4">Explore How Naivik Can Optimize Your Critical Processes</h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          
+          <div class="solution-card mb-5">
+            <div class="solution-card-header">
+              <img src="../assets/img/bg10.jpg" alt="Workflow Automation" class="solution-img">
+            </div>
+            <div class="solution-card-body">
+              <h4 class="solution-title">Intelligent Workflow Automation</h4>
+              <p class="solution-text">
+                Design and deploy automated workflows that handle complex, multi-step processes without human intervention. Reduce manual errors and speed up service delivery.
+              </p>
+            </div>
+          </div>
+
+          <div class="solution-card">
+            <div class="solution-card-header">
+              <img src="../assets/img/bg10.jpg" alt="Workflow Automation" class="solution-img">
+            </div>
+            <div class="solution-card-body">
+              <h4 class="solution-title">Smart Data Intake & Processing</h4>
+              <p class="solution-text">
+                Automatically capture, classify, and validate data from emails, forms, and documents. Our AI extracts key information and routes it to the right systems instantly.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-6 staggered-col">
+          
+          <div class="solution-card mb-5">
+            <div class="solution-card-header">
+              <img src="../assets/img/bg10.jpg" alt="Workflow Automation" class="solution-img">
+            </div>
+            <div class="solution-card-body">
+              <h4 class="solution-title">Predictive Resource Allocation</h4>
+              <p class="solution-text">
+                Use historical data to forecast demand and automatically allocate field teams or server capacity before bottlenecks occur.
+              </p>
+            </div>
+          </div>
+
+          <div class="solution-card">
+            <div class="solution-card-header">
+              <img src="../assets/img/bg10.jpg" alt="Workflow Automation" class="solution-img">
+            </div>
+            <div class="solution-card-body">
+              <h4 class="solution-title">Real-Time Operational Insights</h4>
+              <p class="solution-text">
+                Gain complete visibility into your operations with live dashboards that track KPIs, identify inefficiencies, and monitor automated process health.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBJECTIVES (black bg with blue gradient overlay) -->
+  <section class="py-9 bg-gradient-dark-blue position-relative overflow-hidden bg-rounded">
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-mist-overlay" style="pointer-events: none;"></div>
+    
+    <div class="container position-relative z-index-2">
+      <div class="row text-center mb-6">
+        <div class="col-lg-8 mx-auto">
+          <h6 class="text-info font-weight-bolder text-uppercase tracking-widest mb-3">OBJECTIVES</h6>
+          <h2 class="text-white mb-4">Why Choose Naivik?</h2>
+        </div>
+      </div>
+
+      <div class="row g-5">
+        <div class="col-md-6 col-lg-4">
+          <div class="d-flex flex-column h-100">
+            <div class="icon-box mb-4">
+              <i class="material-symbols-rounded text-info fs-2">integration_instructions</i>
+            </div>
+            <h5 class="text-white mb-3">Easy Integration</h5>
+            <p class="text-white opacity-7 mb-0">
+              Naivik integrates with tools you already use, like Gmail, Workday, Slack, and more.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="d-flex flex-column h-100">
+            <div class="icon-box mb-4">
+              <i class="material-symbols-rounded text-info fs-2">code_off</i>
+            </div>
+            <h5 class="text-white mb-3">No-Code Automation</h5>
+            <p class="text-white opacity-7 mb-0">
+              With no-code, anyone can automate with Naivik. No need to hire IT experts.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="d-flex flex-column h-100">
+            <div class="icon-box mb-4">
+              <i class="material-symbols-rounded text-info fs-2">featured_play_list</i>
+            </div>
+            <h5 class="text-white mb-3">Lean Features</h5>
+            <p class="text-white opacity-7 mb-0">
+              No unnecessary tools or features. Naivik contains only what you need.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="d-flex flex-column h-100">
+            <div class="icon-box mb-4">
+              <i class="material-symbols-rounded text-info fs-2">handyman</i>
+            </div>
+            <h5 class="text-white mb-3">All-in-One Tool</h5>
+            <p class="text-white opacity-7 mb-0">
+              Build intelligent AI Agents, design automated workflows, manage service tickets, and more in one comprehensive platform.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="d-flex flex-column h-100">
+            <div class="icon-box mb-4">
+              <i class="material-symbols-rounded text-info fs-2">fact_check</i>
+            </div>
+            <h5 class="text-white mb-3">Extensive Traceability and Auditing</h5>
+            <p class="text-white opacity-7 mb-0">
+              Naivik provides a detailed history of your process executions and previous agent conversations, so you always know what's happening in your business.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="d-flex flex-column h-100">
+            <div class="icon-box mb-4">
+              <i class="material-symbols-rounded text-info fs-2">security</i>
+            </div>
+            <h5 class="text-white mb-3">Top-Grade Security and Performance</h5>
+            <p class="text-white opacity-7 mb-0">
+              Naivik offers industry standard enterprise security and performance for all our AI automation tools.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR FOCUS -->
+  <section class="py-8 bg-white">
+    <div class="container">
+      <div class="row text-center mb-6">
+        <div class="col-12">
+          <h6 class="text-info font-weight-bolder text-uppercase tracking-widest mb-2">SERVICES</h6>
+          <h2 class="text-naivik-dark">Expedite Your Digital Transformation <br>Through Our AI-Assisted Consulting</h2>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        
+        <div class="col-lg-6">
+          <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" class="service-image-header" alt="IT Strategy">
+            <div class="service-content">
+              <h4 class="text-naivik-dark font-weight-bold mb-3">IT Strategic Planning</h4>
+              <p class="text-naivik-muted mb-4">Our familiarity with popular manufacturing tools and enterprise ERPs means we're confident we can help you clarify your strategic goals and guide technology investments.</p>
+              <ul class="check-list">
+                
+                <li class="check-item">
+                  <span class="material-symbols-rounded check-icon">check_circle</span>
+                  <span class="check-text">Align technology initiatives with strategic goals.</span>
+                </li>
+
+                <li class="check-item">
+                  <span class="material-symbols-rounded check-icon">check_circle</span>
+                  <span class="check-text">Advise on technology investments for increased adaptability.</span>
+                </li>
+
+                <li class="check-item">
+                  <span class="material-symbols-rounded check-icon">check_circle</span>
+                  <span class="check-text">Assist in integrating your tech stack effectively.</span>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80" class="service-image-header" alt="Cloud Architecture">
+            <div class="service-content">
+              <h4 class="text-naivik-dark font-weight-bold mb-3">Digital Architecture Review</h4>
+              <p class="text-naivik-muted mb-4">Our architecture review and design services are focused on building scalable and efficient systems for providers, ensuring your systems handle demand without sacrificing quality.</p>
+              <ul class="check-list">
+                
+                <li class="check-item">
+                  <span class="material-symbols-rounded check-icon">check_circle</span>
+                  <span class="check-text">Align technology initiatives with strategic goals.</span>
+                </li>
+
+                <li class="check-item">
+                  <span class="material-symbols-rounded check-icon">check_circle</span>
+                  <span class="check-text">Advise on technology investments for increased adaptability.</span>
+                </li>
+
+                <li class="check-item">
+                  <span class="material-symbols-rounded check-icon">check_circle</span>
+                  <span class="check-text">Assist in integrating your tech stack effectively.</span>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80" class="service-image-header" alt="AI Agents">
+            <div class="service-content">
+              <h4 class="text-naivik-dark font-weight-bold mb-3">Custom AI Agent Development</h4>
+              <p class="text-naivik-muted mb-4">We build intelligent AI agents tailored to your specific business rules, allowing you to automate customer interactions and internal workflows with precision.</p>
+              <ul class="check-list">
+                
+                <li class="check-item">
+                  <span class="material-symbols-rounded check-icon">check_circle</span>
+                  <span class="check-text">Align technology initiatives with strategic goals.</span>
+                </li>
+
+                <li class="check-item">
+                  <span class="material-symbols-rounded check-icon">check_circle</span>
+                  <span class="check-text">Advise on technology investments for increased adaptability.</span>
+                </li>
+
+                <li class="check-item">
+                  <span class="material-symbols-rounded check-icon">check_circle</span>
+                  <span class="check-text">Assist in integrating your tech stack effectively.</span>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" class="service-image-header" alt="Automation">
+            <div class="service-content">
+              <h4 class="text-naivik-dark font-weight-bold mb-3">Full-Cycle Process Automation</h4>
+              <p class="text-naivik-muted mb-4">Naivik specializes in identifying manual bottlenecks and replacing them with robust, automated pipelines that grow with your organizational needs.</p>
+              <ul class="check-list">
+                
+                <li class="check-item">
+                  <span class="material-symbols-rounded check-icon">check_circle</span>
+                  <span class="check-text">Align technology initiatives with strategic goals.</span>
+                </li>
+
+                <li class="check-item">
+                  <span class="material-symbols-rounded check-icon">check_circle</span>
+                  <span class="check-text">Advise on technology investments for increased adaptability.</span>
+                </li>
+
+                <li class="check-item">
+                  <span class="material-symbols-rounded check-icon">check_circle</span>
+                  <span class="check-text">Assist in integrating your tech stack effectively.</span>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CALL TO ACTION COMPONENT-->
+  <section class="cta-section-bg">
+    <svg class="external-waves" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,500 Q 250,400 500,500" />
+      <path d="M0,450 Q 250,350 500,450" />
+      <path d="M0,400 Q 250,300 500,400" />
+    </svg>
+
+    <div class="container">
+      <div class="cta-card-wrapper animate__animated animate__fadeInUp">
+        <div class="row g-0">
+          
+          <div class="col-lg-7 cta-content-side">
+            <div class="internal-waves-pattern"></div>
+            
+            <h2 class="text-white display-5 font-weight-bolder mb-4">
+              Don’t Leave Your Customers <br>and Teams in the Dark
+            </h2>
+            <p class="text-white opacity-8 lead mb-5">
+              Start using Naivik today and see the power of AI-Powered Automation. We turn complex challenges into streamlined growth.
+            </p>
+            <div class="d-flex flex-wrap gap-3 font-weight-bold">
+              <button class="btn bg-gradient-info rounded-pill px-4 py-3 text-white shadow-info">
+                Book Free Consultation
+              </button>
+              <button class="btn btn-outline-white rounded-pill px-4 py-3">
+                Learn More About Naivik Enterprise
+              </button>
+            </div>
+          </div>
+
+          <div class="col-lg-5 d-none d-lg-block">
+            <div class="cta-image-side">
+              <div class="image-frame-bg"></div>
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Naivik Professional" class="cta-photo">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--   FOOTER   -->
+  <footer class="footer py-7 bg-white position-relative overflow-hidden border-top">
+    <div class="bg-splatter-light" style="bottom: -10%; right: -5%; opacity: 0.15; width: 400px; height: 400px;"></div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-5 mb-lg-0">
+          <a class="navbar-brand font-weight-bolder text-naivik-dark tracking-widest text-uppercase mb-4 d-block" href="index.html">
+            Naivik
+          </a>
+          <p class="text-naivik-muted pe-lg-5 mb-4">
+            Bridging the gap between complex legacy systems and future-ready efficiency through AI-powered automation and the Naivik platform.
+          </p>
+          <div class="social-icons d-flex gap-3">
+            <a href="#" class="icon-box-sm-light"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="icon-box-sm-light"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="icon-box-sm-light"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-2 mb-4 mb-md-0">
+          <h6 class="text-naivik-dark font-weight-bolder text-uppercase mb-3 small">Company</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="about-us.html" class="footer-link-light">About Us</a></li>
+            <li class="mb-2"><a href="about-us.html#join-team" class="footer-link-light">Careers</a></li>
+            <li class="mb-2"><a href="#" class="footer-link-light">Partners</a></li>
+            <li class="mb-2"><a href="contact-us.html" class="footer-link-light">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-3 mb-4 mb-md-0">
+          <h6 class="text-naivik-dark font-weight-bolder text-uppercase mb-3 small">Solutions</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="services.html" class="footer-link-light">Naivik Platform</a></li>
+            <li class="mb-2"><a href="services.html" class="footer-link-light">AI Agent Development</a></li>
+            <li class="mb-2"><a href="services.html" class="footer-link-light">IT Strategic Planning</a></li>
+            <li class="mb-2"><a href="services.html" class="footer-link-light">Workflow Automation</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-3">
+          <h6 class="text-naivik-dark font-weight-bolder text-uppercase mb-3 small">Get in Touch</h6>
+          <p class="text-naivik-muted small mb-2 d-flex align-items-center">
+            <span class="material-symbols-rounded text-info me-2 fs-6">mail</span>
+            manoj.jayaswal@naivik.com
+          </p>
+          <p class="text-naivik-muted small mb-2 d-flex align-items-center">
+            <span class="material-symbols-rounded text-info me-2 fs-6">location_on</span>
+            Markham, ON, Canada
+          </p>
+          <div class="mt-4 p-3 border-radius-lg bg-light-glass border border-light">
+            <p class="text-naivik-dark text-xs font-weight-bold mb-1">Status</p>
+            <p class="text-info text-xs mb-0 d-flex align-items-center">
+              <span class="status-dot-light me-2"></span> Systems Operational
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="horizontal dark my-5 opacity-1">
+
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+          <p class="text-naivik-muted opacity-6 small mb-0">
+            © <script>document.write(new Date().getFullYear())</script> Naivik Technologies. All rights reserved.
+          </p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <a href="#" class="footer-link-light small mx-2">Privacy Policy</a>
+          <a href="#" class="footer-link-light small mx-2">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script>
+    // Synchronized Grid Glow
+    const containers = document.querySelectorAll('.glow-container');
+    containers.forEach(container => {
+      container.addEventListener('mousemove', e => {
+        const cards = container.getElementsByClassName('glow-card-wrapper');
+        for (const card of cards) {
+          const rect = card.getBoundingClientRect(), x = e.clientX - rect.left, y = e.clientY - rect.top;
+          card.style.setProperty("--mouse-x", `${x}px`);
+          card.style.setProperty("--mouse-y", `${y}px`);
+        }
+      });
+    });
+
+    // Sidebar Mist Logic
+    window.addEventListener('scroll', () => {
+      const mist = document.getElementById('blue-mist');
+      const section = document.getElementById('observed-section');
+      const rect = section.getBoundingClientRect();
+      mist.style.opacity = (rect.top < window.innerHeight && rect.bottom > 0) ? "1" : "0";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+{
+  "name": "Naivik",
+  "version": "3.0.4",
+  "description": "Company",
+  "main": "index.html",
+  "directories": {
+    "example": "root"
+  },
+  "scripts": {
+    "open-app": "gulp open-app",
+    "start": "npm run open-app",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "gulp-watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rush1404"
+  },
+  "keywords": [
+    "material kit 2",
+    "bootstrap 5",
+    "design system",
+    "ui kit",
+    "creative tim",
+    "html kit",
+    "html css kit",
+    "web kit",
+    "freebie",
+    "free bootstrap kit",
+    "css3 kit",
+    "bootstrap design system",
+    "frontend",
+    "responsive bootstrap kit"
+  ],
+  "author": "Rushabh Shh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rush1404"
+  },
+  "devDependencies": {
+    "gulp": "^5.0.1",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-install": "^1.1.0",
+    "gulp-open": "^3.0.1",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "sass": "^1.49.9"
+  },
+  "homepage": "https://rushsh.dev",
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1"
+  }
+}

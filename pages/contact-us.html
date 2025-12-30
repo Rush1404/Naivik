@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>Contact Us | Naivik</title>
+  
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link id="pagestyle" href="../assets/css/material-kit.css?v=3.1.0" rel="stylesheet" />
+
+  <style>
+    .navbar-brand.tracking-widest {
+      letter-spacing: 0.3rem; /* Spaced out letters for a premium look */
+      font-size: 1.2rem;
+      font-family: 'Inter', sans-serif;
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+    }
+
+    .navbar-brand.tracking-widest:hover {
+      opacity: 1;
+    }
+
+    :root {
+      --baby-blue: #89CFF0;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+    }
+
+    body { 
+      background-color: #ffffff; 
+      color: var(--text-dark);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .text-naivik-blue { color: var(--baby-blue) !important; }
+    
+    /* Interactive Form Styles */
+    .form-control {
+      border: 1px solid #e2e8f0;
+      padding: 0.75rem 1rem;
+      transition: all 0.3s ease;
+      border-radius: 12px;
+    }
+
+    /* Hover effect: Border turns blue */
+    .form-control:hover {
+      border-color: var(--baby-blue);
+    }
+
+    /* Focus effect: Blue border and soft glow */
+    .form-control:focus {
+      border-color: var(--baby-blue);
+      box-shadow: 0 0 0 3px rgba(137, 207, 240, 0.2);
+    }
+
+    .contact-card {
+      border-radius: 24px;
+      border: 1px solid #f1f5f9;
+      background: #ffffff;
+    }
+
+    .icon-circle {
+      width: 50px;
+      height: 50px;
+      background: rgba(137, 207, 240, 0.1);
+      color: var(--baby-blue);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .btn-naivik {
+      background: linear-gradient(135deg, #89CFF0 0%, #3a8fb7 100%);
+      color: white;
+      border-radius: 50px;
+      padding: 0.8rem 2rem;
+      font-weight: 600;
+      border: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-naivik:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(137, 207, 240, 0.3);
+      color: white;
+    }
+
+    /* --- Naivik Light Footer Styles --- */
+
+    .bg-light-glass {
+        background: rgba(137, 207, 240, 0.05);
+        backdrop-filter: blur(5px);
+    }
+
+    .bg-splatter-light {
+        position: absolute;
+        background: radial-gradient(circle, rgba(137, 207, 240, 0.3) 0%, transparent 70%);
+        filter: blur(50px);
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .footer-link-light {
+        color: #64748b;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+    }
+
+    .footer-link-light:hover {
+        color: #89CFF0; /* Baby Blue */
+        padding-left: 5px;
+    }
+
+    .icon-box-sm-light {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8fafc;
+        color: #64748b;
+        border-radius: 50%;
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+    }
+
+    .icon-box-sm-light:hover {
+        background: #89CFF0;
+        color: #fff;
+        border-color: #89CFF0;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(137, 207, 240, 0.3);
+    }
+
+    .status-dot-light {
+        width: 8px;
+        height: 8px;
+        background-color: #00d2ff;
+        border-radius: 50%;
+        display: inline-block;
+        box-shadow: 0 0 8px rgba(0, 210, 255, 0.5);
+        animation: pulse-blue-light 2s infinite;
+    }
+
+    @keyframes pulse-blue-light {
+        0% { transform: scale(0.9); opacity: 0.6; }
+        70% { transform: scale(1.1); opacity: 1; }
+        100% { transform: scale(0.9); opacity: 0.6; }
+    }
+
+    /* Ensure typography matches Naivik brand */
+    .text-naivik-dark { color: #1e293b; }
+    .text-naivik-muted { color: #64748b; }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3 navbar-transparent">
+    <div class="container">
+      <a class="navbar-brand font-weight-bolder text-black tracking-widest text-uppercase" href="../index.html" rel="tooltip" title="Naivik Home" data-placement="bottom">
+        Naivik
+      </a>
+      
+      <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon mt-2">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </span>
+      </button>
+
+      <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
+        <ul class="navbar-nav navbar-nav-hover ms-auto align-items-center">
+          <li class="nav-item mx-2">
+            <a class="nav-link ps-2 text-dark" href="../index.html">Home</a>
+          </li>
+
+          <li class="nav-item mx-2">
+            <a class="nav-link ps-2 text-dark" href="services.html">Services</a>
+          </li>
+
+          <li class="nav-item dropdown dropdown-hover mx-2">
+            <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-dark" id="dropdownIndustries" data-bs-toggle="dropdown" aria-expanded="false">
+              Industries
+              <img src="../assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-2 d-lg-block d-none">
+            </a>
+            <div class="dropdown-menu dropdown-menu-animation dropdown-md p-3 border-radius-lg mt-0 mt-lg-3" aria-labelledby="dropdownIndustries">
+              <a href="industries.html" class="dropdown-item border-radius-md">Healthcare</a>
+              <a href="#" class="dropdown-item border-radius-md">Finance & Banking</a>
+              <a href="#" class="dropdown-item border-radius-md">Retail & E-commerce</a>
+              <a href="#" class="dropdown-item border-radius-md">Manufacturing</a>
+            </div>
+          </li>
+
+          <li class="nav-item mx-2">
+            <a class="nav-link ps-2 text-dark" href="about-us.html">About Us</a>
+          </li>
+
+          <li class="nav-item my-auto ms-3">
+            <a href="contact-us.html" class="btn btn-sm bg-gradient-info mb-0 shadow-info px-4 py-2">
+              Contact Us
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="py-9">
+    <div class="container">
+      <div class="row align-items-center">
+        
+        <div class="col-lg-5 mb-5 mb-lg-0">
+          <h6 class="text-naivik-blue font-weight-bolder text-uppercase tracking-widest mb-3">Contact Us</h6>
+          <h1 class="display-4 font-weight-bolder mb-4">Let’s Start a <br>Conversation</h1>
+          <p class="text-muted lead mb-5">
+            Whether you're looking to modernize your systems with the Naivik platform or need custom enterprise consulting, our team is here to help.
+          </p>
+
+          <div class="d-flex mb-4">
+            <div class="icon-circle me-3">
+              <span class="material-symbols-rounded">mail</span>
+            </div>
+            <div>
+              <p class="text-xs text-uppercase font-weight-bold text-muted mb-0">Email us at</p>
+              <h5 class="font-weight-bold">manoj.jayaswal@naivik.com</h5>
+            </div>
+          </div>
+
+          <div class="d-flex mb-4">
+            <div class="icon-circle me-3">
+              <span class="material-symbols-rounded">location_on</span>
+            </div>
+            <div>
+              <p class="text-xs text-uppercase font-weight-bold text-muted mb-0">Visit us in</p>
+              <h5 class="font-weight-bold">Markham, ON, Canada</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-7 ps-lg-6">
+          <div class="contact-card shadow-xl p-5">
+            <form id="contact-form">
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <label class="form-label font-weight-bold small">Full Name</label>
+                  <input type="text" name="name" class="form-control" placeholder="John Doe" required>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <label class="form-label font-weight-bold small">Email Address</label>
+                  <input type="email" name="email" class="form-control" placeholder="john@company.com" required>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label font-weight-bold small">Subject</label>
+                <select name="subject" class="form-control">
+                  <option>Naivik Platform Inquiry</option>
+                  <option>Enterprise Consulting</option>
+                  <option>Careers</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div class="mb-5">
+                <label class="form-label font-weight-bold small">How can we help?</label>
+                <textarea name="message" class="form-control" rows="5" placeholder="Tell us about your project or goals..." required></textarea>
+              </div>
+
+              <div class="text-end">
+                <button type="submit" class="btn btn-naivik shadow-info">
+                  Send Message
+                  <i class="fas fa-paper-plane ms-2"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer py-7 bg-white position-relative overflow-hidden border-top">
+    <div class="bg-splatter-light" style="bottom: -10%; right: -5%; opacity: 0.15; width: 400px; height: 400px;"></div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-5 mb-lg-0">
+          <a class="navbar-brand font-weight-bolder text-naivik-dark tracking-widest text-uppercase mb-4 d-block" href="index.html">
+            Naivik
+          </a>
+          <p class="text-naivik-muted pe-lg-5 mb-4">
+            Bridging the gap between complex legacy systems and future-ready efficiency through AI-powered automation and the Naivik platform.
+          </p>
+          <div class="social-icons d-flex gap-3">
+            <a href="#" class="icon-box-sm-light"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="icon-box-sm-light"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="icon-box-sm-light"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-2 mb-4 mb-md-0">
+          <h6 class="text-naivik-dark font-weight-bolder text-uppercase mb-3 small">Company</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="about-us.html" class="footer-link-light">About Us</a></li>
+            <li class="mb-2"><a href="about-us.html#join-team" class="footer-link-light">Careers</a></li>
+            <li class="mb-2"><a href="#" class="footer-link-light">Partners</a></li>
+            <li class="mb-2"><a href="contact-us.html" class="footer-link-light">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-3 mb-4 mb-md-0">
+          <h6 class="text-naivik-dark font-weight-bolder text-uppercase mb-3 small">Solutions</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="services.html" class="footer-link-light">Naivik Platform</a></li>
+            <li class="mb-2"><a href="services.html" class="footer-link-light">AI Agent Development</a></li>
+            <li class="mb-2"><a href="services.html" class="footer-link-light">IT Strategic Planning</a></li>
+            <li class="mb-2"><a href="services.html" class="footer-link-light">Workflow Automation</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-3">
+          <h6 class="text-naivik-dark font-weight-bolder text-uppercase mb-3 small">Get in Touch</h6>
+          <p class="text-naivik-muted small mb-2 d-flex align-items-center">
+            <span class="material-symbols-rounded text-info me-2 fs-6">mail</span>
+            manoj.jayaswal@naivik.com
+          </p>
+          <p class="text-naivik-muted small mb-2 d-flex align-items-center">
+            <span class="material-symbols-rounded text-info me-2 fs-6">location_on</span>
+            Markham, ON, Canada
+          </p>
+          <div class="mt-4 p-3 border-radius-lg bg-light-glass border border-light">
+            <p class="text-naivik-dark text-xs font-weight-bold mb-1">Status</p>
+            <p class="text-info text-xs mb-0 d-flex align-items-center">
+              <span class="status-dot-light me-2"></span> Systems Operational
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="horizontal dark my-5 opacity-1">
+
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+          <p class="text-naivik-muted opacity-6 small mb-0">
+            © <script>document.write(new Date().getFullYear())</script> Naivik Technologies. All rights reserved.
+          </p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <a href="#" class="footer-link-light small mx-2">Privacy Policy</a>
+          <a href="#" class="footer-link-light small mx-2">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+
+  <!--  EmailJS Setup  -->
+
+  <script type="text/javascript"
+          src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+
+  <script type="text/javascript">
+    (function() {
+      // Verified Public Key
+      emailjs.init("L90S_Wf_j0ZGBdOnS");
+    })();
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const contactForm = document.getElementById('contact-form');
+      
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+          event.preventDefault();
+
+          const btn = contactForm.querySelector('button');
+          const originalBtnText = btn.innerHTML;
+          
+          // Visual Feedback
+          btn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin ms-2"></i>';
+          btn.disabled = true;
+
+          // Verified IDs from your dashboard
+          const serviceID = 'service_k4g4whc';
+          const templateID = 'template_c5o7y4p';
+
+          emailjs.sendForm(serviceID, templateID, contactForm)
+            .then(() => {
+              btn.innerHTML = 'Sent! <i class="fas fa-check ms-2"></i>';
+              btn.classList.add('btn-success');
+              contactForm.reset();
+              
+              setTimeout(() => {
+                btn.innerHTML = originalBtnText;
+                btn.classList.remove('btn-success');
+                btn.disabled = false;
+              }, 5000);
+            })
+            .catch((err) => {
+              btn.disabled = false;
+              btn.innerHTML = 'Error. Try Again';
+              console.error('EmailJS Error Details:', err);
+              alert("Failed to send message. Please check the console for errors.");
+            });
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
