@@ -49,6 +49,7 @@
   },
   "homepage": "https://rushsh.dev",
   "dependencies": {
-    "@emailjs/browser": "^4.4.1"
+    "@emailjs/browser": "^4.4.1",
+    "supabase": "^2.70.5"
   }
 }

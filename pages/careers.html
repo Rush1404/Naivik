@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>Careers | Naivik Digital Transformation</title>
+  
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link id="pagestyle" href="../assets/css/material-kit.css?v=3.1.0" rel="stylesheet" />
+
+  <!-- -------- IMPORTING SUPABASE ------- -->  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    /* --- Naivik Premium Dark Core --- */
+    :root {
+      --baby-blue: #89CFF0;
+      --deep-black: #000000;
+      --soft-dark: #121212;
+    }
+
+    body { background-color: var(--deep-black); color: #ffffff; }
+
+    /* --- Job Card Styles --- */
+    .border-glow-blue {
+      border: 1px solid rgba(137, 207, 240, 0.2) !important;
+      transition: all 0.3s ease;
+      background: var(--soft-dark);
+    }
+
+    .border-glow-blue:hover {
+      border-color: var(--baby-blue) !important;
+      box-shadow: 0 0 20px rgba(137, 207, 240, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .text-baby-blue { color: var(--baby-blue) !important; }
+    .bg-baby-blue { background-color: var(--baby-blue) !important; }
+
+    /* Navigation Adjustment for Dark Mode */
+    .navbar-brand.tracking-widest {
+      letter-spacing: 0.3rem;
+      font-size: 1.2rem;
+      font-family: 'Inter', sans-serif;
+      color: #fff !important;
+    }
+
+    /* Accordion Customization */
+    .accordion-button:not(.collapsed) {
+      background-color: transparent;
+      color: var(--baby-blue);
+      box-shadow: none;
+    }
+    .accordion-button { color: white; background: transparent; }
+    .accordion-item { background: transparent; border-color: #333; }
+
+    /* Hero Splatter */
+    .bg-splatter {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(137, 207, 240, 0.1) 0%, transparent 70%);
+      filter: blur(80px);
+      z-index: -1;
+    }
+  </style>
+</head>
+
+<body class="bg-black">
+    <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3 navbar-transparent">
+    <div class="container">
+      <a class="navbar-brand font-weight-bolder text-black tracking-widest text-uppercase" href="../index.html" rel="tooltip" title="Naivik Home" data-placement="bottom">
+        Naivik
+      </a>
+      
+      <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon mt-2">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </span>
+      </button>
+
+      <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
+        <ul class="navbar-nav navbar-nav-hover ms-auto align-items-center">
+          <li class="nav-item mx-2">
+            <a class="nav-link ps-2 text-light" href="../index.html">Home</a>
+          </li>
+
+          <li class="nav-item mx-2">
+            <a class="nav-link ps-2 text-light" href="services.html">Services</a>
+          </li>
+
+          <li class="nav-item dropdown dropdown-hover mx-2">
+            <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-light" id="dropdownIndustries" data-bs-toggle="dropdown" aria-expanded="false">
+              Industries
+              <img src="../assets/img/down-arrow-white.svg" alt="down-arrow" class="arrow ms-2 d-lg-block d-none">
+            </a>
+            <div class="dropdown-menu dropdown-menu-animation dropdown-md p-3 border-radius-lg mt-0 mt-lg-3" aria-labelledby="dropdownIndustries">
+              <a href="industries.html" class="dropdown-item border-radius-md">Healthcare</a>
+              <a href="#" class="dropdown-item border-radius-md">Finance & Banking</a>
+              <a href="#" class="dropdown-item border-radius-md">Retail & E-commerce</a>
+              <a href="#" class="dropdown-item border-radius-md">Manufacturing</a>
+            </div>
+          </li>
+
+          <li class="nav-item mx-2">
+            <a class="nav-link ps-2 text-light" href="careers.html">Careers</a>
+          </li>
+
+          <li class="nav-item mx-2">
+            <a class="nav-link ps-2 text-light" href="about-us.html">About Us</a>
+          </li>
+
+          <li class="nav-item my-auto ms-3">
+            <a href="contact-us.html" class="btn btn-sm bg-gradient-info mb-0 shadow-info px-4 py-2">
+              Contact Us
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="position-relative py-8">
+    <div class="bg-splatter" style="top: -10%; left: -5%;"></div>
+    <div class="container mt-5">
+      <div class="row text-center">
+        <div class="col-lg-8 mx-auto">
+          <h6 class="text-baby-blue font-weight-bolder text-uppercase tracking-widest mb-3">Join The Mission</h6>
+          <h1 class="text-white display-4 font-weight-bolder mb-4">Build the Future of <span class="text-baby-blue">Automation</span></h1>
+          <p class="text-muted lead">Help us bridge the gap between legacy systems and AI-powered efficiency.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="py-5 bg-black min-vh-100">
+    <div class="container">
+      <div class="row">
+        
+        <div class="col-lg-3">
+          <h5 class="text-white mb-4">Filter results:</h5>
+          <div class="accordion accordion-flush" id="jobFilters">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#filterSpec">
+                  Specialisation
+                </button>
+              </h2>
+              <div id="filterSpec" class="accordion-collapse collapse show">
+                <div class="accordion-body px-0 text-muted">
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="checkOps" checked>
+                    <label class="form-check-label" for="checkOps">Operations (1)</label>
+                  </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-9">
+          <div id="job-container">
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer py-7 bg-black border-top border-dark">
+    <div class="container text-center">
+      <h4 class="text-white tracking-widest text-uppercase mb-4">Naivik</h4>
+      <p class="text-muted">© <script>document.write(new Date().getFullYear())</script> Naivik Technologies. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const SUPABASE_URL = 'https://duiqfjsogpiadxhdmdqz.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1aXFmanNvZ3BpYWR4aGRtZHF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2NDM2NDQsImV4cCI6MjA4MzIxOTY0NH0.jyUwREEPhchkWDYX2y7M8WUNkvA94p_J2aiIgoirv8M';
+    const nSupabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function loadJobs() {
+    const container = document.getElementById('job-container');
+    
+    // 1. Fetch all rows from the 'jobs' table
+    const { data: jobs, error } = await nSupabase
+        .from('jobs')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+    if (error) {
+        console.error("Supabase Error:", error);
+        container.innerHTML = `<p class="text-danger">Failed to load jobs.</p>`;
+        return;
+    }
+
+    // 2. Map through the data to create cards
+    container.innerHTML = jobs.map(job => `
+        <div class="card border-glow-blue mb-4 transition-hover">
+        <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-start">
+            <div>
+                <h4 class="text-white mb-1">${job.title}</h4>
+                <div class="d-flex gap-3 text-muted small mb-3">
+                <span><i class="material-symbols-rounded align-bottom fs-6">payments</i> ${job.salary}</span>
+                <span><i class="material-symbols-rounded align-bottom fs-6">location_on</i> ${job.location}</span>
+                <span><i class="material-symbols-rounded align-bottom fs-6">calendar_month</i> ${job.posted}</span>
+                </div>
+            </div>
+            <button class="btn btn-link text-baby-blue p-0 shadow-none">
+                SAVE <i class="material-symbols-rounded align-middle">star</i>
+            </button>
+            </div>
+            <p class="text-muted">${job.shortDescription}</p>
+            <a href="job-details.html?id=${job.id}" class="text-baby-blue fw-bold text-decoration-none">Read more →</a>
+        </div>
+        </div>
+    `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', loadJobs);
+  </script>
+
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+</body>
+</html>

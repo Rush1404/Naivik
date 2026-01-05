@@ -13,6 +13,333 @@
 <!DOCTYPE html>
 <html lang="en" itemscope itemtype="http://schema.org/WebPage">
 
+<style>
+  .navbar-brand.tracking-widest {
+    letter-spacing: 0.3rem; /* Spaced out letters for a premium look */
+    font-size: 1.2rem;
+    font-family: 'Inter', sans-serif;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+  }
+
+  .navbar-brand.tracking-widest:hover {
+    opacity: 1;
+  }
+
+  /* Shadow for the 'Elevated' button effect */
+  .shadow-info {
+    box-shadow: 0 4px 20px 0 rgba(137, 207, 240, 0.4) !important;
+  }
+
+  .bg-jet-black {
+    background-color: #000 !important;
+    color: #fff !important;
+    /* Removes the default Bootstrap card border */
+    border: none !important; 
+    /* Removes the shadow which can cause a light 'glow' edge */
+    box-shadow: none !important; 
+    /* Ensures no rounded corners at all */
+    border-radius: 0 !important;
+    /* Removes any margin that might show the page background */
+    margin: 0 !important; 
+  }
+
+  .section {
+    overflow: hidden;
+  }
+
+  /* Custom spacing to match the screenshot's 'wide' feel */
+  .tracking-widest {
+    letter-spacing: 0.2rem;
+    font-size: 0.85rem;
+  }
+
+  /* Optional: Subtle blue glow behind the text to mimic the image's lighting */
+  .bg-jet-black {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bg-jet-black::before {
+    content: "";
+    position: absolute;
+    top: 10%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(137, 207, 240, 0.1) 0%, rgba(0,0,0,0) 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Misty glow for the CTA section to match the sidebar effect */
+  .bg-jet-black .btn-lg {
+      position: relative;
+      box-shadow: 0 4px 15px rgba(137, 207, 240, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .bg-jet-black .btn-lg:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(137, 207, 240, 0.5);
+  }
+
+  /* Ensure the text doesn't feel too cramped on mobile */
+  @media (max-width: 991.98px) {
+      .bg-jet-black .px-lg-7 {
+          padding-left: 1rem !important;
+          padding-right: 1rem !important;
+      }
+  }
+
+  /* Misty Blue Bubble */
+  #blue-bubble {
+    position: fixed;
+    right: 0;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%);
+    
+    /* Much bigger dimensions to hold the mist */
+    width: 150px; 
+    height: 300px;
+    
+    /* Misty Gradient: 
+      - Uses 'ellipse at center right' to anchor it to the side.
+      - Uses rgba() colors. The last number is alpha (opacity).
+      - Starts at 0.5 opacity and fades to 0.0 opacity (fully transparent)
+      - It fades to transparent at 70% so the very edges are soft.
+    */
+    background: radial-gradient(
+        ellipse at center right, 
+        rgba(137, 207, 240, 0.5) 0%,   /* Darker baby blue center, 50% opacity */
+        rgba(191, 234, 242, 0.2) 40%,  /* Lighter baby blue, 20% opacity */
+        rgba(255, 255, 255, 0) 75%     /* Fades to nothing before the edge */
+    );
+    
+    display: none; /* Hidden by default */
+    opacity: 0;    /* Start fully transparent for fade in */
+    z-index: 1050;
+    pointer-events: none; /* let clicks pass through it */
+    
+    /* Longer animation duration (1.5 seconds) with smooth easing */
+    transition: opacity 1.5s ease-in-out;
+  }
+
+  /* Image Handling */
+  .phase-img {
+    display: none;
+    transition: opacity 0.8s ease;
+  }
+
+  .phase-img.active {
+    display: block;
+    animation: fadeIn 0.8s ease;
+  }
+
+  /* Timer Restart Logic */
+  .phase-item.active .timer-progress {
+    animation: fillProgress 5s linear forwards;
+  }
+
+  /* Keep previous Dot and Timer-Container CSS from my last response */
+  .phase-dots {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 10;
+  }
+
+  .timer-container {
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    margin-top: 20px;
+    border-radius: 10px;
+  }
+
+  .timer-progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #89CFF0, #3a4fff);
+  }
+
+  @keyframes fillProgress {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
+
+  /* Visibility */
+  .phase-item { display: none; }
+  .phase-item.active { display: block; animation: fadeIn 0.8s ease; }
+
+  .phase-dots {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 20; /* Ensure they are above other elements */
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(137, 207, 240, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dot:hover {
+    background: rgba(137, 207, 240, 0.6);
+  }
+
+  .dot.active {
+    background: #89CFF0;
+    box-shadow: 0 0 10px rgba(137, 207, 240, 0.5);
+    transform: scale(1.2);
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* --- Naivik Premium Footer Styles --- */
+
+  .bg-dark-glass {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+  }
+
+  .footer-link {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+  }
+
+  .footer-link:hover {
+      color: #89CFF0; /* Baby Blue */
+      padding-left: 5px;
+  }
+
+  .icon-box-sm {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(137, 207, 240, 0.1);
+      color: #89CFF0;
+      border-radius: 50%;
+      border: 1px solid rgba(137, 207, 240, 0.2);
+      transition: all 0.3s ease;
+  }
+
+  .icon-box-sm:hover {
+      background: #89CFF0;
+      color: #000;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(137, 207, 240, 0.3);
+  }
+
+  .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #00f2fe;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 10px #00f2fe;
+      animation: pulse-blue 2s infinite;
+  }
+
+  @keyframes pulse-blue {
+      0% { transform: scale(0.95); opacity: 0.7; }
+      70% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.7; }
+  }
+
+  .horizontal.light {
+      background-image: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  }
+  /* Ensure typography matches Naivik brand */
+  .text-naivik-dark { color: #1e293b; }
+  .text-naivik-muted { color: #64748b; }
+
+  /* --- New Partner Carousel Styles --- */
+
+  /* The section background should be white now */
+  .bg-white { background-color: #ffffff !important; }
+
+  /* Heading style matching reference */
+  .section-heading-dark {
+      color: #1e293b; /* Dark slate color */
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 3rem;
+  }
+
+  /* The container that hides overflowing logos */
+  .marquee-viewport {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      padding: 1rem 0; /* Space for shadows */
+  }
+
+
+  /* The track that holds all cards and moves */
+  .marquee-track {
+      display: flex;
+      width: max-content; /* Ensures single line */
+      /* Adjust time (40s) to speed up or slow down */
+      animation: scrollMarquee 40s linear infinite;
+  }
+
+  /* The individual logo card style based on reference image */
+  .partner-card {
+      /* Light gray background from reference */
+      background-color: #ffffff; 
+      border-radius: 16px;
+      /* Fixed dimensions to ensure 5 fit nicely on standard desktops */
+      width: 220px; 
+      height: 100px;
+      /* Spacing between cards */
+      margin-right: 24px;
+      /* Flex layout to center logo */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      flex-shrink: 0; /* Prevents squishing */
+  }
+
+  /* Styling placeholders since we don't have real SVGs */
+  .partner-placeholder {
+      font-weight: 700;
+      color: #5f6d7a; /* Muted gray text */
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+  }
+
+  /* The animation that moves the track left */
+  @keyframes scrollMarquee {
+      0% {
+          transform: translateX(0);
+      }
+      100% {
+          /* Move left by the total width of the ORIGINAL 10 items + gaps. 
+            Calculation: (220px card + 24px gap) * 10 items = 2440px */
+          transform: translateX(-2440px); 
+      }
+  }
+</style>
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -71,6 +398,10 @@
               <a href="#" class="dropdown-item border-radius-md">Retail & E-commerce</a>
               <a href="#" class="dropdown-item border-radius-md">Manufacturing</a>
             </div>
+          </li>
+
+          <li class="nav-item mx-2">
+            <a class="nav-link ps-2 text-white" href="./pages/careers.html">Careers</a>
           </li>
 
           <li class="nav-item mx-2">
@@ -139,36 +470,44 @@
       </div>
     </div>
   </section>
-    <!-- -------- NUMBERS PALLET ------- -->
-  <section class="pt-7 pb-4" id="count-stats">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-9 mx-auto py-3">
-          <div class="row">
-            <div class="col-md-4 position-relative">
-              <div class="p-3 text-center">
-                <h1 class="text-gradient text-dark"><span id="state1" countTo="70">0</span>+</h1>
-                <h5 class="mt-3">Coded Elements</h5>
-                <p class="text-sm font-weight-normal">From buttons, to inputs, navbars, alerts or cards, you are covered</p>
-              </div>
-              <hr class="vertical dark">
-            </div>
-            <div class="col-md-4 position-relative">
-              <div class="p-3 text-center">
-                <h1 class="text-gradient text-dark"> <span id="state2" countTo="15">0</span>+</h1>
-                <h5 class="mt-3">Design Blocks</h5>
-                <p class="text-sm font-weight-normal">Mix the sections, change the colors and unleash your creativity</p>
-              </div>
-              <hr class="vertical dark">
-            </div>
-            <div class="col-md-4">
-              <div class="p-3 text-center">
-                <h1 class="text-gradient text-dark" id="state3" countTo="4">0</h1>
-                <h5 class="mt-3">Pages</h5>
-                <p class="text-sm font-weight-normal">Save 3-4 weeks of work when you use our pre-made pages for your website</p>
-              </div>
-            </div>
+    <!-- -------- COMPANY CAROUSEL ------- -->
+  <section class="py-6">
+    <div class="container-fluid px-0"> <div class="row">
+        <div class="col-12">
+          <h3 class="section-heading-dark">
+            Trusted Around The World By Our Partners & Clients
+          </h3>
+        </div>
+      </div>
+
+      <div class="marquee-viewport">
+        <div class="marquee-track">
+          
+          <div class="partner-card">
+              <span class="partner-placeholder" style="color: #4b286d;">Telus</span>
           </div>
+          <div class="partner-card">
+              <span class="partner-placeholder" style="color: #da291c;">Mobile Klinik</span>
+          </div>
+          <div class="partner-card">
+              <span class="partner-placeholder" style="color: #00539b;">LifeLabs</span>
+          </div>
+          <div class="partner-card">
+              <span class="partner-placeholder" style="color: #96bf0d;">Telesat</span>
+          </div>
+          <div class="partner-card">
+              <span class="partner-placeholder" style="color: #000000;">eSight</span>
+          </div>
+          <div class="partner-card">
+              <span class="partner-placeholder" style="color: #003da5;">King&Bay</span>
+          </div>
+
+          <div class="partner-card"><span class="partner-placeholder" style="color: #4b286d;">Telus</span></div>
+          <div class="partner-card"><span class="partner-placeholder" style="color: #da291c;">Mobile Klinik</span></div>
+          <div class="partner-card"><span class="partner-placeholder" style="color: #00539b;">LifeLabs</span></div>
+          <div class="partner-card"><span class="partner-placeholder" style="color: #96bf0d;">Telesat</span></div>
+          <div class="partner-card"><span class="partner-placeholder" style="color: #000000;">eSight</span></div>
+          <div class="partner-card"><span class="partner-placeholder" style="color: #003da5;">King&Bay</span></div>
         </div>
       </div>
     </div>
@@ -397,263 +736,7 @@
       </div>
     </div>
   </footer>
-  <style>
-    .navbar-brand.tracking-widest {
-      letter-spacing: 0.3rem; /* Spaced out letters for a premium look */
-      font-size: 1.2rem;
-      font-family: 'Inter', sans-serif;
-      opacity: 0.9;
-      transition: opacity 0.3s ease;
-    }
 
-    .navbar-brand.tracking-widest:hover {
-      opacity: 1;
-    }
-
-    /* Shadow for the 'Elevated' button effect */
-    .shadow-info {
-      box-shadow: 0 4px 20px 0 rgba(137, 207, 240, 0.4) !important;
-    }
-
-    .bg-jet-black {
-      background-color: #000 !important;
-      color: #fff !important;
-      /* Removes the default Bootstrap card border */
-      border: none !important; 
-      /* Removes the shadow which can cause a light 'glow' edge */
-      box-shadow: none !important; 
-      /* Ensures no rounded corners at all */
-      border-radius: 0 !important;
-      /* Removes any margin that might show the page background */
-      margin: 0 !important; 
-    }
-
-    .section {
-      overflow: hidden;
-    }
-
-    /* Custom spacing to match the screenshot's 'wide' feel */
-    .tracking-widest {
-      letter-spacing: 0.2rem;
-      font-size: 0.85rem;
-    }
-
-    /* Optional: Subtle blue glow behind the text to mimic the image's lighting */
-    .bg-jet-black {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .bg-jet-black::before {
-      content: "";
-      position: absolute;
-      top: 10%;
-      right: -10%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(137, 207, 240, 0.1) 0%, rgba(0,0,0,0) 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Misty glow for the CTA section to match the sidebar effect */
-    .bg-jet-black .btn-lg {
-        position: relative;
-        box-shadow: 0 4px 15px rgba(137, 207, 240, 0.3);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .bg-jet-black .btn-lg:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(137, 207, 240, 0.5);
-    }
-
-    /* Ensure the text doesn't feel too cramped on mobile */
-    @media (max-width: 991.98px) {
-        .bg-jet-black .px-lg-7 {
-            padding-left: 1rem !important;
-            padding-right: 1rem !important;
-        }
-    }
-
-    /* Misty Blue Bubble */
-    #blue-bubble {
-      position: fixed;
-      right: 0;
-      top: 50%; /* Center vertically */
-      transform: translateY(-50%);
-      
-      /* Much bigger dimensions to hold the mist */
-      width: 150px; 
-      height: 300px;
-      
-      /* Misty Gradient: 
-        - Uses 'ellipse at center right' to anchor it to the side.
-        - Uses rgba() colors. The last number is alpha (opacity).
-        - Starts at 0.5 opacity and fades to 0.0 opacity (fully transparent)
-        - It fades to transparent at 70% so the very edges are soft.
-      */
-      background: radial-gradient(
-          ellipse at center right, 
-          rgba(137, 207, 240, 0.5) 0%,   /* Darker baby blue center, 50% opacity */
-          rgba(191, 234, 242, 0.2) 40%,  /* Lighter baby blue, 20% opacity */
-          rgba(255, 255, 255, 0) 75%     /* Fades to nothing before the edge */
-      );
-      
-      display: none; /* Hidden by default */
-      opacity: 0;    /* Start fully transparent for fade in */
-      z-index: 1050;
-      pointer-events: none; /* let clicks pass through it */
-      
-      /* Longer animation duration (1.5 seconds) with smooth easing */
-      transition: opacity 1.5s ease-in-out;
-    }
-
-    /* Image Handling */
-    .phase-img {
-      display: none;
-      transition: opacity 0.8s ease;
-    }
-
-    .phase-img.active {
-      display: block;
-      animation: fadeIn 0.8s ease;
-    }
-
-    /* Timer Restart Logic */
-    .phase-item.active .timer-progress {
-      animation: fillProgress 5s linear forwards;
-    }
-
-    /* Keep previous Dot and Timer-Container CSS from my last response */
-    .phase-dots {
-      position: absolute;
-      left: 0;
-      top: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      z-index: 10;
-    }
-
-    .timer-container {
-      width: 100%;
-      height: 3px;
-      background: rgba(255, 255, 255, 0.1);
-      margin-top: 20px;
-      border-radius: 10px;
-    }
-
-    .timer-progress {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #89CFF0, #3a4fff);
-    }
-
-    @keyframes fillProgress {
-      from { width: 0%; }
-      to { width: 100%; }
-    }
-
-    /* Visibility */
-    .phase-item { display: none; }
-    .phase-item.active { display: block; animation: fadeIn 0.8s ease; }
-
-    .phase-dots {
-      position: absolute;
-      left: 0;
-      top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      z-index: 20; /* Ensure they are above other elements */
-    }
-
-    .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(137, 207, 240, 0.3);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .dot:hover {
-      background: rgba(137, 207, 240, 0.6);
-    }
-
-    .dot.active {
-      background: #89CFF0;
-      box-shadow: 0 0 10px rgba(137, 207, 240, 0.5);
-      transform: scale(1.2);
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* --- Naivik Premium Footer Styles --- */
-
-    .bg-dark-glass {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(10px);
-    }
-
-    .footer-link {
-        color: rgba(255, 255, 255, 0.6);
-        text-decoration: none;
-        font-size: 0.9rem;
-        transition: all 0.3s ease;
-    }
-
-    .footer-link:hover {
-        color: #89CFF0; /* Baby Blue */
-        padding-left: 5px;
-    }
-
-    .icon-box-sm {
-        width: 36px;
-        height: 36px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(137, 207, 240, 0.1);
-        color: #89CFF0;
-        border-radius: 50%;
-        border: 1px solid rgba(137, 207, 240, 0.2);
-        transition: all 0.3s ease;
-    }
-
-    .icon-box-sm:hover {
-        background: #89CFF0;
-        color: #000;
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(137, 207, 240, 0.3);
-    }
-
-    .status-dot {
-        width: 8px;
-        height: 8px;
-        background-color: #00f2fe;
-        border-radius: 50%;
-        display: inline-block;
-        box-shadow: 0 0 10px #00f2fe;
-        animation: pulse-blue 2s infinite;
-    }
-
-    @keyframes pulse-blue {
-        0% { transform: scale(0.95); opacity: 0.7; }
-        70% { transform: scale(1); opacity: 1; }
-        100% { transform: scale(0.95); opacity: 0.7; }
-    }
-
-    .horizontal.light {
-        background-image: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-    }
-    /* Ensure typography matches Naivik brand */
-    .text-naivik-dark { color: #1e293b; }
-    .text-naivik-muted { color: #64748b; }
-  </style>
 
 
 
