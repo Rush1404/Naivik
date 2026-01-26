@@ -69,6 +69,22 @@
       filter: blur(80px);
       z-index: -1;
     }
+    .job-inactive {
+        filter: grayscale(0.8) brightness(0.7);
+        opacity: 0.7;
+        pointer-events: none; /* Disables clicking into the details */
+        border: 1px dashed rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .status-badge-closed {
+        background: rgba(255, 255, 255, 0.1);
+        color: #888;
+        font-size: 0.7rem;
+        padding: 4px 12px;
+        border-radius: 50px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
   </style>
 </head>
 
@@ -93,8 +109,16 @@
             <a class="nav-link ps-2 text-light" href="../index.html">Home</a>
           </li>
 
-          <li class="nav-item mx-2">
-            <a class="nav-link ps-2 text-light" href="services.html">Services</a>
+          <li class="nav-item dropdown dropdown-hover mx-2">
+            <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-white" id="dropdownIndustries" data-bs-toggle="dropdown" aria-expanded="false">
+              Services
+              <img src="../assets/img/down-arrow-white.svg" alt="down-arrow" class="arrow ms-2 d-lg-block d-none">
+            </a>
+            <div class="dropdown-menu dropdown-menu-animation dropdown-md p-3 border-radius-lg mt-0 mt-lg-3" aria-labelledby="dropdownIndustries">
+              <a href="#" class="dropdown-item border-radius-md">System Integration</a>
+              <a href="#" class="dropdown-item border-radius-md">Software Services</a>
+              <a href="#" class="dropdown-item border-radius-md">Recruitment</a>
+            </div>
           </li>
 
           <li class="nav-item dropdown dropdown-hover mx-2">
@@ -183,50 +207,62 @@
   </footer>
 
   <script>
-    const SUPABASE_URL = 'https://duiqfjsogpiadxhdmdqz.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1aXFmanNvZ3BpYWR4aGRtZHF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2NDM2NDQsImV4cCI6MjA4MzIxOTY0NH0.jyUwREEPhchkWDYX2y7M8WUNkvA94p_J2aiIgoirv8M';
-    const nSupabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      const SUPABASE_URL = 'https://duiqfjsogpiadxhdmdqz.supabase.co';
+      const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1aXFmanNvZ3BpYWR4aGRtZHF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2NDM2NDQsImV4cCI6MjA4MzIxOTY0NH0.jyUwREEPhchkWDYX2y7M8WUNkvA94p_J2aiIgoirv8M';
+      const nSupabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    async function loadJobs() {
-    const container = document.getElementById('job-container');
-    
-    // 1. Fetch all rows from the 'jobs' table
-    const { data: jobs, error } = await nSupabase
-        .from('jobs')
-        .select('*')
-        .order('created_at', { ascending: false });
+      async function loadJobs() {
+          const container = document.getElementById('job-container');
+          
+          // 1. Fetch ALL jobs (Active and Inactive)
+          const { data: jobs, error } = await nSupabase
+              .from('jobs')
+              .select('*')
+              .order('is_active', { ascending: false }) // Active jobs stay at the top
+              .order('priority', { ascending: false });
 
-    if (error) {
-        console.error("Supabase Error:", error);
-        container.innerHTML = `<p class="text-danger">Failed to load jobs.</p>`;
-        return;
-    }
+          if (error) {
+              container.innerHTML = `<p class="text-danger">Error loading positions.</p>`;
+              return;
+          }
 
-    // 2. Map through the data to create cards
-    container.innerHTML = jobs.map(job => `
-        <div class="card border-glow-blue mb-4 transition-hover">
-        <div class="card-body p-4">
-            <div class="d-flex justify-content-between align-items-start">
-            <div>
-                <h4 class="text-white mb-1">${job.title}</h4>
-                <div class="d-flex gap-3 text-muted small mb-3">
-                <span><i class="material-symbols-rounded align-bottom fs-6">payments</i> ${job.salary}</span>
-                <span><i class="material-symbols-rounded align-bottom fs-6">location_on</i> ${job.location}</span>
-                <span><i class="material-symbols-rounded align-bottom fs-6">calendar_month</i> ${job.posted}</span>
-                </div>
-            </div>
-            <button class="btn btn-link text-baby-blue p-0 shadow-none">
-                SAVE <i class="material-symbols-rounded align-middle">star</i>
-            </button>
-            </div>
-            <p class="text-muted">${job.shortDescription}</p>
-            <a href="job-details.html?id=${job.id}" class="text-baby-blue fw-bold text-decoration-none">Read more →</a>
-        </div>
-        </div>
-    `).join('');
-    }
+          container.innerHTML = jobs.map(job => {
+              const isActive = job.is_active !== false;
+              
+              return `
+                  <div class="card border-glow-blue mb-4 ${!isActive ? 'job-inactive' : 'transition-hover'}">
+                      <div class="card-body p-4">
+                          <div class="d-flex justify-content-between align-items-start">
+                              <div>
+                                  <h4 class="${isActive ? 'text-white' : 'text-secondary'} mb-1">${job.title}</h4>
+                                  <div class="d-flex gap-3 text-muted small mb-3">
+                                      <span><i class="material-symbols-rounded align-bottom fs-6">location_on</i> ${job.location}</span>
+                                      <span><i class="material-symbols-rounded align-bottom fs-6">calendar_month</i> ${job.posted}</span>
+                                  </div>
+                              </div>
+                              <div>
+                                  ${isActive 
+                                      ? '<span class="badge border border-baby-blue text-baby-blue">Open</span>' 
+                                      : '<span class="status-badge-closed">Closed</span>'}
+                              </div>
+                          </div>
+                          
+                          <p class="text-muted">${job.shortDescription}</p>
+                          
+                          <div class="d-flex justify-content-between align-items-center mt-4">
+                              ${isActive 
+                                  ? `<a href="job-details.html?id=${job.id}" class="text-baby-blue fw-bold text-decoration-none">View Position Details →</a>` 
+                                  : `<span class="text-secondary small italic">This position is currently not accepting applications.</span>`}
+                              
+                              <span class="text-xxs text-uppercase tracking-wider text-secondary">Ref: ${job.ref || 'N/A'}</span>
+                          </div>
+                      </div>
+                  </div>
+              `;
+          }).join('');
+      }
 
-    document.addEventListener('DOMContentLoaded', loadJobs);
+      document.addEventListener('DOMContentLoaded', loadJobs);
   </script>
 
   <script src="../assets/js/core/bootstrap.min.js"></script>
