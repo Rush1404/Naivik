@@ -283,60 +283,61 @@
       margin-bottom: 3rem;
   }
 
-  /* The container that hides overflowing logos */
+  /* 1. The Container */
   .marquee-viewport {
+      width: 100%;
       overflow: hidden;
       position: relative;
-      width: 100%;
-      padding: 1rem 0; /* Space for shadows */
+      padding: 20px 0;
   }
 
-
-  /* The track that holds all cards and moves */
+  /* 2. The Animation Track */
   .marquee-track {
       display: flex;
-      width: max-content; /* Ensures single line */
-      /* Adjust time (40s) to speed up or slow down */
-      animation: scrollMarquee 40s linear infinite;
+      width: calc(250px * 12); /* Width of one card * total number of cards */
+      animation: scrollMarquee 30s linear infinite;
   }
 
-  /* The individual logo card style based on reference image */
+  /* 3. The Card Spacing */
   .partner-card {
-      /* Light gray background from reference */
-      background-color: #ffffff; 
-      border-radius: 16px;
-      /* Fixed dimensions to ensure 5 fit nicely on standard desktops */
-      width: 220px; 
-      height: 100px;
-      /* Spacing between cards */
-      margin-right: 24px;
-      /* Flex layout to center logo */
+      width: 250px;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem;
-      flex-shrink: 0; /* Prevents squishing */
+      padding: 0 40px;
   }
 
-  /* Styling placeholders since we don't have real SVGs */
-  .partner-placeholder {
-      font-weight: 700;
-      color: #5f6d7a; /* Muted gray text */
-      font-size: 1.2rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+  /* 4. The Logo Styling */
+  .partner-logo {
+      max-height: 45px;
+      max-width: 160px;
+      object-fit: contain;
   }
 
-  /* The animation that moves the track left */
+  .partner-card:hover .partner-logo {
+      opacity: 1;
+      filter: none; /* Shows original color on hover */
+  }
+
+    /* Add this to your stylesheet */
+  .logo-lg {
+      transform: scale(1.5); /* Increases size by 30% */
+  }
+
+  .logo-xl {
+      transform: scale(2.3); /* For very small/circular logos */
+  }
+
+  /* 5. The Keyframes for Movement */
   @keyframes scrollMarquee {
-      0% {
-          transform: translateX(0);
-      }
-      100% {
-          /* Move left by the total width of the ORIGINAL 10 items + gaps. 
-            Calculation: (220px card + 24px gap) * 10 items = 2440px */
-          transform: translateX(-2440px); 
-      }
+      0% { transform: translateX(0); }
+      100% { transform: translateX(calc(-250px * 6)); } /* Move by half the total width */
+  }
+
+  /* Pause on hover for better UX */
+  .marquee-viewport:hover .marquee-track {
+      animation-play-state: paused;
   }
 </style>
 
@@ -432,23 +433,18 @@
       <span class="mask bg-gradient-white opacity-6"></span>
       <div class="container">
         <div class="row">
-          <div class="col-lg-5 offset-lg-1 text-start my-auto mt-12">
-            <p1 class="text-dark">Expert Solutions</p1>
-            <h1 class="text-dark mt-2 mb-3">Driving Future Results</h1>
-            <p class="lead mb-4 text-dark opacity-8">Naivik delivers AI-driven IT solutions to accelerate digital transformation and business growth.</p>
+          <div class="col-lg-7 offset-lg-1 text-start my-auto mt-12">
+            <p class="text-dark mt-6">Expert Solutions</p>
+            <h2 class="text-dark mt-2 mb-3">Navigating Complexity. <br> Delivering ROI.</h1>
+            <p class="mb-4 text-dark opacity-8">Most enterprises are drowning in diluted focus, rigid SaaS platforms, and talent that understands "process" but not "purpose."</p>
+            <p class="mb-4 text-dark opacity-8">Naivik provides the Skilled Navigators—veteran leaders who combine high-level strategy with "in-the-trenches" execution. Whether we are hand-picking your next Program lead, integrating your mission-critical systems, or deploying tools that kill manual busywork, we focus on one thing: the successful delivery of your business outcome.</p>
             <button type="submit" class="btn border border-2 border-black text-dark rounded-pill">Explore Services</button>
-            <div class="d-flex justify-content-center">
-              <a href="javascript:;"><i class="fab fa-facebook text-lg text-white me-4"></i></a>
-              <a href="javascript:;"><i class="fab fa-instagram text-lg text-white me-4"></i></a>
-              <a href="javascript:;"><i class="fab fa-twitter text-lg text-white me-4"></i></a>
-              <a href="javascript:;"><i class="fab fa-google-plus text-lg text-white"></i></a>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </header>
-  <!-- -------- OVERVIEW INFO PALLET ------- -->
+  <!-- -------- OVERVIEW INFO PALLET ------- 
   <section class="my-5 py-5">
     <div class="container">
       <div class="row">
@@ -477,45 +473,33 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
     <!-- -------- COMPANY CAROUSEL ------- -->
-  <section class="py-6">
-    <div class="container-fluid px-0"> <div class="row">
-        <div class="col-12">
-          <h3 class="section-heading-dark">
-            Trusted Around The World By Our Partners & Clients
+  <section class="py-6 bg-black overflow-hidden">
+    <div class="container-fluid px-0">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h3 class="text-dark opacity-8 tracking-widest text-uppercase" style="font-size: 0.9rem;">
+            Trusted By Our Partners & Clients
           </h3>
         </div>
       </div>
 
       <div class="marquee-viewport">
         <div class="marquee-track">
+          <div class="partner-card"><img src="../assets/img/logos/telus.svg" class="partner-logo" alt="Telus"></div>
+          <div class="partner-card"><img src="../assets/img/logos/mobile-klinik.png" class="partner-logo" style="transform: scale(2.0);" alt="Mobile Klinik"></div>
+          <div class="partner-card"><img src="../assets/img/logos/lifelabs.png" class="partner-logo" alt="LifeLabs"></div>
+          <div class="partner-card"><img src="../assets/img/logos/telesat.svg" class="partner-logo" style="transform: scale(3.3);" alt="Telesat"></div>
+          <div class="partner-card"><img src="../assets/img/logos/esight.png" class="partner-logo" alt="eSight"></div>
+          <div class="partner-card"><img src="../assets/img/logos/king-bay.svg" class="partner-logo" style="transform: scale(1.4);" alt="King & Bay"></div>
           
-          <div class="partner-card">
-              <span class="partner-placeholder" style="color: #4b286d;">Telus</span>
-          </div>
-          <div class="partner-card">
-              <span class="partner-placeholder" style="color: #da291c;">Mobile Klinik</span>
-          </div>
-          <div class="partner-card">
-              <span class="partner-placeholder" style="color: #00539b;">LifeLabs</span>
-          </div>
-          <div class="partner-card">
-              <span class="partner-placeholder" style="color: #96bf0d;">Telesat</span>
-          </div>
-          <div class="partner-card">
-              <span class="partner-placeholder" style="color: #000000;">eSight</span>
-          </div>
-          <div class="partner-card">
-              <span class="partner-placeholder" style="color: #003da5;">King&Bay</span>
-          </div>
-
-          <div class="partner-card"><span class="partner-placeholder" style="color: #4b286d;">Telus</span></div>
-          <div class="partner-card"><span class="partner-placeholder" style="color: #da291c;">Mobile Klinik</span></div>
-          <div class="partner-card"><span class="partner-placeholder" style="color: #00539b;">LifeLabs</span></div>
-          <div class="partner-card"><span class="partner-placeholder" style="color: #96bf0d;">Telesat</span></div>
-          <div class="partner-card"><span class="partner-placeholder" style="color: #000000;">eSight</span></div>
-          <div class="partner-card"><span class="partner-placeholder" style="color: #003da5;">King&Bay</span></div>
+          <div class="partner-card"><img src="../assets/img/logos/telus.svg" class="partner-logo" alt="Telus"></div>
+          <div class="partner-card"><img src="../assets/img/logos/mobile-klinik.png" class="partner-logo" alt="Mobile Klinik"></div>
+          <div class="partner-card"><img src="../assets/img/logos/lifelabs.png" class="partner-logo" alt="LifeLabs"></div>
+          <div class="partner-card"><img src="../assets/img/logos/telesat.svg" class="partner-logo logo-xl" alt="Telesat"></div>
+          <div class="partner-card"><img src="../assets/img/logos/esight.png" class="partner-logo" alt="eSight"></div>
+          <div class="partner-card"><img src="../assets/img/logos/king-bay.svg" alt="King & Bay" class="partner-logo"></div>
         </div>
       </div>
     </div>
@@ -533,30 +517,23 @@
             <div class="col-md-6">
               <div class="info">
                 <i class="material-symbols-rounded text-gradient text-success text-3xl">content_copy</i>
-                <h5 class="font-weight-bolder mt-3">Autonomous Project Mapping</h5>
-                <p class="pe-5">Our AI engine analyzes your requirements to generate comprehensive project foundations, architectural drafts, and documentation in seconds.</p>
+                <h5 class="font-weight-bolder mt-3">High-Stakes Recruiting</h5>
+                <p class="pe-5">We don't rely on AI keywords. We rely on decades of experience in Telco, Banking, and Hardware. We manually vet every candidate through case studies and peer interviews. Once placed, we don't disappear—we provide 90 days of active navigation to ensure your new leader integrates into your culture and starts delivering ROI immediately.</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="info">
                 <i class="material-symbols-rounded text-gradient text-success text-3xl">flip_to_front</i>
-                <h5 class="font-weight-bolder mt-3">Predictive Sprint Planning</h5>
-                <p class="pe-3">Leverage machine learning to identify potential bottlenecks and optimize resource allocation before the first line of code is written.</p>
+                <h5 class="font-weight-bolder mt-3">Pragmatic Systems Integration</h5>
+                <p class="pe-3">We specialize in Telco-grade BSS and LEO satellite design where reliability is non-negotiable. Our philosophy is Pragmatism over Prestige: we don't build for the sake of the technology; we build for the people who use it and the ROI that justifies it. We design systems that are operable, scalable, and embraced by your team.</p>
               </div>
             </div>
           </div>
-          <div class="row justify-content-start mt-5">
-            <div class="col-md-6 mt-3">
+          <div class="row justify-content-center mt-5">
+            <div class="col-md-12 mt-3">
               <i class="material-symbols-rounded text-gradient text-success text-3xl">price_change</i>
-              <h5 class="font-weight-bolder mt-3">Accelerated Development Cycle</h5>
-              <p class="pe-5">Reduce overhead costs and manual labor by automating repetitive tasks.</p>
-            </div>
-            <div class="col-md-6 mt-3">
-              <div class="info">
-                <i class="material-symbols-rounded text-gradient text-success text-3xl">devices</i>
-                <h5 class="font-weight-bolder mt-3">Seamless Tech Integration</h5>
-                <p class="pe-3">Designed to fit into your existing workflow, our AI solutions bridge the gap between complex data and actionable development milestones.</p>
-              </div>
+              <h5 class="font-weight-bolder mt-3">The Naivik PM Agent</h5>
+              <p class="pe-5">Stop paying for "per-seat" licenses that turn your Program Managers into data-entry clerks. Our AI-driven Project Management tool handles the "chase"—synthesizing meeting minutes, updating risk logs, and building stakeholder reports automatically. We clear the manual clutter so your leaders can focus on what matters: <b>Risk and Opportunity Management.</b></p>
             </div>
           </div>
         </div>
@@ -600,42 +577,66 @@
               <div class="phase-content-wrapper ps-5">
                 <div class="phase-item active">
                   <h6 class="text-gradient text-info font-weight-bolder mb-2">PHASE 1</h6>
-                  <h2 class="text-white mb-4">Strategic Planning & Architecture</h2>
-                  <p class="text-white opacity-8 mb-4">Aligning technology investments with business objectives to optimize resource allocation.</p>
-                  <div class="phase-card p-4">
-                    <div class="d-flex align-items-center mb-2">
-                      <i class="material-symbols-rounded text-info me-2">architecture</i>
-                      <h5 class="text-white mb-0">System Design</h5>
-                    </div>
-                    <p class="text-sm text-white opacity-7">Creating scalable digital systems that adapt to evolving business needs.</p>
+                  <h2 class="text-white mb-4">High-Stakes Talent & Leadership</h2>
+                  <p class="text-white opacity-8 mb-4">
+                    <b>The Problem:</b> AI-keyword matching and generic staffing agencies provide "bodies," but not leaders. <br><br>
+                    <b>How Naivik Helps:</b> We leverage veteran expertise to recruit Program and Project Managers who don't just manage tasks—they manage ROI.
+                  </p>
+                  <ul class="list-unstyled text-white opacity-8">
+                    <li class="d-flex mb-3">
+                      <i class="material-symbols-rounded text-baby-blue me-3">arrow_right</i>
+                      <span><b>Veterans Hiring Veterans:</b>Our manual, case-study-driven vetting process ensures your leaders understand your culture and your business.</span>
+                    </li>
+                    <li class="d-flex">
+                      <i class="material-symbols-rounded text-baby-blue me-3">arrow_right</i>
+                      <span><b>The 90-Day Transition:</b>We don't just place a candidate; we provide active consulting and mentorship for the first 90 days to ensure a seamless "launch" into your organization.</span>
+                    </li>
+                  </ul>
+                  <div class="mt-4">
                     <div class="timer-container"><div class="timer-progress"></div></div>
                   </div>
                 </div>
 
                 <div class="phase-item">
                   <h6 class="text-gradient text-info font-weight-bolder mb-2">PHASE 2</h6>
-                  <h2 class="text-white mb-4">Development & Implementation</h2>
-                  <p class="text-white opacity-8 mb-4">Transforming blueprints into reality through agile development and rigorous testing.</p>
-                  <div class="phase-card p-4">
-                    <div class="d-flex align-items-center mb-2">
-                      <i class="material-symbols-rounded text-info me-2">terminal</i>
-                      <h5 class="text-white mb-0">Agile Sprints</h5>
-                    </div>
-                    <p class="text-sm text-white opacity-7">Iterative deployment cycles ensuring transparency and consistent value delivery.</p>
+                  <h2 class="text-white mb-4">Resilient Systems Integration</h2>
+                  <p class="text-white opacity-8 mb-4">
+                    <b>The Problem:</b> Over-engineered "prestige" platforms that require massive change management and provide little operational value. <br><br>
+                    <b>How Naivik Helps:</b> We lead the design and implementation of Telco-grade BSS and complex LEO satellite systems with a focus on <b>Pragmatism over Prestige.</b>
+                  </p>
+                  <ul class="list-unstyled text-white opacity-8">
+                    <li class="d-flex mb-3">
+                      <i class="material-symbols-rounded text-baby-blue me-3">arrow_right</i>
+                      <span><b>Built for Day 2:</b> We design systems that are scalable and operable, ensuring your technical operations are efficient long after the initial launch.</span>
+                    </li>
+                    <li class="d-flex">
+                      <i class="material-symbols-rounded text-baby-blue me-3">arrow_right</i>
+                      <span><b>Platform Selection:</b>We help you select and scale technology to the size of your actual ROI, not the size of a vendor’s sales pitch.</span>
+                    </li>
+                  </ul>
+                  <div class="mt-4">
                     <div class="timer-container"><div class="timer-progress"></div></div>
                   </div>
                 </div>
 
                 <div class="phase-item">
                   <h6 class="text-gradient text-info font-weight-bolder mb-2">PHASE 3</h6>
-                  <h2 class="text-white mb-4">Optimization & Support</h2>
-                  <p class="text-white opacity-8 mb-4">Continuously monitoring and refining systems to ensure peak efficiency.</p>
-                  <div class="phase-card p-4">
-                    <div class="d-flex align-items-center mb-2">
-                      <i class="material-symbols-rounded text-info me-2">rocket_launch</i>
-                      <h5 class="text-white mb-0">Performance Tuning</h5>
-                    </div>
-                    <p class="text-sm text-white opacity-7">AI-driven insights to automate manual tasks and modernize legacy processes.</p>
+                  <h2 class="text-white mb-4">Modernizing the PMO with AI Agents</h2>
+                  <p class="text-white opacity-8 mb-4">
+                    <b>The Problem:</b> Senior leaders are trapped in the "SaaS Trap"—spending more time on data entry and stakeholder chasing than on managing risk. <br><br>
+                    <b>How Naivik Helps:</b> We deploy custom Project Management "Agents" that automate the low-value manual work.
+                  </p>
+                  <ul class="list-unstyled text-white opacity-8">
+                    <li class="d-flex mb-3">
+                      <i class="material-symbols-rounded text-baby-blue me-3">arrow_right</i>
+                      <span><b>Automated Synthesis:</b>Our tools collect and synthesize meeting minutes and update risk logs automatically.</span>
+                    </li>
+                    <li class="d-flex">
+                      <i class="material-symbols-rounded text-baby-blue me-3">arrow_right</i>
+                      <span><b>Focus on Opportunity: </b>By removing the "clutter" of status reporting, we empower your PMs to focus on identifying risks and capturing opportunities before they impact the bottom line.</span>
+                    </li>
+                  </ul>
+                  <div class="mt-4">
                     <div class="timer-container"><div class="timer-progress"></div></div>
                   </div>
                 </div>
@@ -833,16 +834,16 @@
       });
     }
   </script>
-  <script>
-    if (document.getElementsByClassName('page-header')) {
-      window.onscroll = debounce(function() {
-        var scrollPosition = window.pageYOffset;
-        var bgParallax = document.querySelector('.page-header');
-        var oVal = (window.scrollY / 4);
-        bgParallax.style.transform = 'translate3d(0,' + oVal + 'px,0)';
-      }, 6);
-    }
-  </script>
+  // <script>
+  //   if (document.getElementsByClassName('page-header')) {
+  //     window.onscroll = debounce(function() {
+  //       var scrollPosition = window.pageYOffset;
+  //       var bgParallax = document.querySelector('.page-header');
+  //       var oVal = (window.scrollY / 4);
+  //       bgParallax.style.transform = 'translate3d(0,' + oVal + 'px,0)';
+  //     }, 6);
+  //   }
+  // </script>
 
   <div id="blue-bubble"></div>
 
