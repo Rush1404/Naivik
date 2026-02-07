@@ -13,6 +13,9 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link id="pagestyle" href="../assets/css/material-kit.css?v=3.1.0" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="../assets/css/floating-navbar.css">
+  <script src="../assets/js/floating-navbar.js"></script>
 
   <!-- -------- IMPORTING SUPABASE ------- -->  
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -89,69 +92,6 @@
 </head>
 
 <body class="bg-black">
-    <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3 navbar-transparent">
-    <div class="container">
-      <a class="navbar-brand font-weight-bolder text-black tracking-widest text-uppercase" href="../index.html" rel="tooltip" title="Naivik Home" data-placement="bottom">
-        Naivik
-      </a>
-      
-      <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon mt-2">
-          <span class="navbar-toggler-bar bar1"></span>
-          <span class="navbar-toggler-bar bar2"></span>
-          <span class="navbar-toggler-bar bar3"></span>
-        </span>
-      </button>
-
-      <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
-        <ul class="navbar-nav navbar-nav-hover ms-auto align-items-center">
-          <li class="nav-item mx-2">
-            <a class="nav-link ps-2 text-light" href="../index.html">Home</a>
-          </li>
-
-          <li class="nav-item dropdown dropdown-hover mx-2">
-            <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-white" id="dropdownIndustries" data-bs-toggle="dropdown" aria-expanded="false">
-              Services
-              <img src="../assets/img/down-arrow-white.svg" alt="down-arrow" class="arrow ms-2 d-lg-block d-none">
-            </a>
-            <div class="dropdown-menu dropdown-menu-animation dropdown-md p-3 border-radius-lg mt-0 mt-lg-3" aria-labelledby="dropdownIndustries">
-              <a href="#" class="dropdown-item border-radius-md">System Integration</a>
-              <a href="#" class="dropdown-item border-radius-md">Software Services</a>
-              <a href="#" class="dropdown-item border-radius-md">Recruitment</a>
-            </div>
-          </li>
-
-          <li class="nav-item dropdown dropdown-hover mx-2">
-            <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center text-light" id="dropdownIndustries" data-bs-toggle="dropdown" aria-expanded="false">
-              Industries
-              <img src="../assets/img/down-arrow-white.svg" alt="down-arrow" class="arrow ms-2 d-lg-block d-none">
-            </a>
-            <div class="dropdown-menu dropdown-menu-animation dropdown-md p-3 border-radius-lg mt-0 mt-lg-3" aria-labelledby="dropdownIndustries">
-              <a href="industries.html" class="dropdown-item border-radius-md">Healthcare</a>
-              <a href="#" class="dropdown-item border-radius-md">Finance & Banking</a>
-              <a href="#" class="dropdown-item border-radius-md">Retail & E-commerce</a>
-              <a href="#" class="dropdown-item border-radius-md">Manufacturing</a>
-            </div>
-          </li>
-
-          <li class="nav-item mx-2">
-            <a class="nav-link ps-2 text-light" href="careers.html">Careers</a>
-          </li>
-
-          <li class="nav-item mx-2">
-            <a class="nav-link ps-2 text-light" href="about-us.html">About Us</a>
-          </li>
-
-          <li class="nav-item my-auto ms-3">
-            <a href="contact-us.html" class="btn btn-sm bg-gradient-info mb-0 shadow-info px-4 py-2">
-              Contact Us
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
   <header class="position-relative py-8">
     <div class="bg-splatter" style="top: -10%; left: -5%;"></div>
     <div class="container mt-5">

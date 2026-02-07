@@ -5,7 +5,7 @@
     "rush1404"
   ],
   "description": "Company",
-  "main": "index.html",
+  "main": "pages/index.html",
   "keywords": [
     "material",
     "design",

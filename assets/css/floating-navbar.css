@@ -1,0 +1,216 @@
+/* assets/css/floating-navbar.css */
+
+:root {
+  /* THEME UPDATE: Switched from Gold/Navy to Black/Baby Blue/Grey */
+  --nav-glass-bg: rgba(10, 10, 10, 0.85); /* Deep Black/Grey */
+  --nav-border: rgba(137, 207, 240, 0.3); /* Baby Blue Border */
+  --nav-accent: #89CFF0; /* Baby Blue */
+  --nav-text: #e2e8f0; /* Light Grey Text */
+  --nav-height: 64px;
+  --nav-width-idle: 64px;
+  --nav-width-expanded: 1000px;
+}
+
+/* MAIN CONTAINER */
+#naivik-floating-nav {
+  position: fixed;
+  top: 24px;
+  
+  /* --- IDLE STATE: 7% FROM LEFT --- */
+  left: 7%; 
+  transform: translateX(0);
+  
+  height: var(--nav-height);
+  width: var(--nav-width-idle); 
+  
+  background: var(--nav-glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--nav-border);
+  border-radius: 50px;
+  
+  z-index: 9999;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Slightly darker shadow */
+  
+  /* --- TRANSITION LOGIC --- */
+  transition: 
+    width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), 
+    left 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    background 0.3s;
+  
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  
+  overflow: visible; 
+  justify-content: flex-start;
+}
+
+/* HOVER STATE (Expanded & Centered) */
+#naivik-floating-nav.expanded {
+  width: var(--nav-width-expanded);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 10, 10, 0.95); /* Nearly Opaque Black */
+  border-color: var(--nav-accent); /* Active Blue Border */
+}
+
+/* Ensure content shows when expanded class is present */
+#naivik-floating-nav.expanded .nav-menu {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(0);
+  transition-delay: 0.1s;
+}
+
+#naivik-floating-nav.expanded .main-icon {
+  transform: scale(1.1);
+  color: var(--nav-accent); /* Icon turns blue when open */
+}
+
+/* 1. THE LOGO ICON (Left Aligned) */
+.nav-logo-container {
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  flex-shrink: 0;
+  text-decoration: none; /* Fix for anchor tag wrapper */
+}
+
+.main-icon {
+  font-size: 28px;
+  color: var(--nav-accent); /* Default Blue */
+  text-shadow: 0 0 15px rgba(137, 207, 240, 0.4);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+#naivik-floating-nav:hover .main-icon {
+  transform: scale(1.1);
+}
+
+/* 2. THE NAV LINKS ROW */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  white-space: nowrap; 
+}
+
+/* LINK ITEMS */
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  color: var(--nav-text);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.nav-link span { font-size: 18px; color: #64748b; transition: 0.2s; } /* Grey Icons */
+
+/* Hover Effect */
+.nav-link:hover {
+  color: #fff;
+}
+.nav-link:hover span { color: var(--nav-accent); }
+
+/* Active State */
+.nav-link.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.nav-link.active span { color: var(--nav-accent); }
+
+
+/* --- DROPDOWNS --- */
+.dropdown-menu-floating {
+  position: absolute;
+  top: 100%; 
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: #000000; /* Pure Black Background */
+  border: 1px solid var(--nav-border);
+  border-radius: 12px;
+  padding: 10px;
+  min-width: 220px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+  
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 10000;
+}
+
+/* Invisible Bridge */
+.dropdown-menu-floating::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  height: 25px;
+  background: transparent;
+  display: block;
+}
+
+/* Show Dropdown on Li Hover */
+.nav-item:hover .dropdown-menu-floating {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(10px);
+}
+
+.dropdown-item-floating {
+  display: block;
+  padding: 10px 15px;
+  color: #9ca3af; /* Muted text */
+  text-decoration: none;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.dropdown-item-floating:hover {
+  background: rgba(137, 207, 240, 0.1); /* Subtle Blue BG */
+  color: var(--nav-accent);
+  padding-left: 20px;
+}
+
+/* CTA BUTTON */
+.nav-cta-item { margin-left: auto; }
+
+.nav-cta {
+  background: var(--nav-accent);
+  color: #000 !important; /* Black text for contrast */
+  font-weight: 800;
+  box-shadow: 0 0 15px rgba(137, 207, 240, 0.3);
+}
+.nav-cta:hover {
+  background: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}

@@ -2,7 +2,7 @@
   "name": "Naivik",
   "version": "3.0.4",
   "description": "Company",
-  "main": "index.html",
+  "main": "/pages/index.html",
   "directories": {
     "example": "root"
   },
@@ -51,6 +51,11 @@
   "homepage": "https://rushsh.dev",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "supabase": "^2.70.5"
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
+    "framer-motion": "^12.33.0",
+    "lucide-react": "^0.563.0",
+    "supabase": "^2.70.5",
+    "three": "^0.182.0"
   }
 }

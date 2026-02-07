@@ -1,0 +1,247 @@
+/* --- 1. GLOBAL VARIABLES & THEME --- */
+:root {
+  --naivik-bg: #0B0F19; /* Deep Slate/Black */
+  --naivik-card: rgba(30, 41, 59, 0.4); /* Glassy Card */
+  --naivik-border: rgba(255, 255, 255, 0.1);
+  --naivik-blue: #89CFF0;
+  --naivik-accent: #38bdf8;
+}
+
+body {
+  background-color: var(--naivik-bg) !important;
+  color: #ffffff !important;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff !important;
+  letter-spacing: -0.02em;
+}
+
+p {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* --- 2. COMPONENTS: NAVBAR --- */
+.navbar-glass {
+  background: rgba(11, 15, 25, 0.7) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--naivik-border);
+}
+
+.navbar-brand.tracking-widest {
+  letter-spacing: 0.25rem;
+  font-weight: 800;
+  color: #fff !important;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--naivik-blue) !important;
+}
+
+/* --- 3. LAYOUT: HERO & GLOWS --- */
+.hero-glow-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-glow-container::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(137, 207, 240, 0.15) 0%, rgba(0,0,0,0) 70%);
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* --- 4. CARDS & UI ELEMENTS --- */
+.glass-card {
+  background: var(--naivik-card);
+  border: 1px solid var(--naivik-border);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  border-radius: 16px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  height: 100%;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--naivik-blue);
+}
+
+.icon-box {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(137, 207, 240, 0.1);
+  border-radius: 12px;
+  color: var(--naivik-blue);
+  margin-bottom: 1.5rem;
+}
+
+/* --- 5. ANIMATIONS: MARQUEE --- */
+.marquee-viewport {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background: var(--naivik-bg);
+  border-top: 1px solid var(--naivik-border);
+  border-bottom: 1px solid var(--naivik-border);
+  padding: 30px 0;
+}
+
+.marquee-track {
+  display: flex;
+  width: calc(250px * 12);
+  animation: scrollMarquee 40s linear infinite;
+}
+
+.partner-card {
+  width: 250px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px;
+}
+
+.partner-logo {
+  max-height: 40px;
+  filter: brightness(0) invert(1) opacity(0.6); 
+  transition: opacity 0.3s ease;
+}
+
+.partner-card:hover .partner-logo {
+  filter: brightness(0) invert(1) opacity(1);
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-250px * 6)); }
+}
+
+/* --- 6. PHASE CYCLER (TIMELINE) --- */
+.phase-dots {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 2rem;
+}
+
+.dot {
+  width: 40px;
+  height: 4px;
+  background: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.dot.active {
+  background: var(--naivik-blue);
+  box-shadow: 0 0 10px rgba(137, 207, 240, 0.4);
+}
+
+.phase-item { display: none; animation: fadeUp 0.8s ease; }
+.phase-item.active { display: block; }
+
+.phase-img { display: none; }
+.phase-img.active { display: block; animation: fadeIn 0.8s ease; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.timer-container {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-top: 20px;
+}
+
+.timer-progress {
+  height: 100%;
+  width: 0%;
+  background: var(--naivik-blue);
+}
+
+.phase-item.active .timer-progress {
+  animation: fillProgress 5s linear forwards;
+}
+
+@keyframes fillProgress { from { width: 0%; } to { width: 100%; } }
+
+/* --- 7. BUTTONS & UTILITIES --- */
+.btn-naivik-primary {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.8);
+  color: #fff !important;
+  border-radius: 50px;
+  padding: 10px 30px;
+  transition: all 0.3s ease;
+}
+
+.btn-naivik-primary:hover {
+  background: #fff;
+  color: #000 !important;
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+.btn-naivik-accent {
+  background: linear-gradient(135deg, #89CFF0 0%, #38bdf8 100%);
+  color: #000 !important;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 35px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(137, 207, 240, 0.3);
+}
+
+.btn-naivik-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(137, 207, 240, 0.5);
+}
+
+.text-gradient-blue {
+  background: linear-gradient(to right, #89CFF0, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- DROPDOWN MENUS (Glass Theme) --- */
+.glass-dropdown {
+  background: rgba(15, 23, 42, 0.95) !important; /* Dark Slate Background */
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--naivik-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.dropdown-item {
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(137, 207, 240, 0.1) !important; /* Baby Blue Hover */
+  color: #fff !important;
+  padding-left: 1.5rem; /* Slight slide effect */
+}

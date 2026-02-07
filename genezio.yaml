@@ -8,9 +8,9 @@ yamlVersion: 2
 # It is optional. It can also be an array if there are multiple frontends you want to deploy.
 frontend:
   # The folder where the frontend scripts will run.
-  path: ./
+  path: ./pages
   # The directory that will be published to the CDN. It is relative to the path.
-  publish: ./
+  publish: ./pages
   scripts:
     # List of scripts that build your frontend before deployment. It should populate the specified `publish` directory.
     build: npm install

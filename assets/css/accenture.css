@@ -1,0 +1,229 @@
+
+:root {
+    --bg-color: #0a0a0a;
+    --accent-color: #89CFF0; /* Baby Blue */
+    --text-primary: #ffffff;
+    --card-bg: #121212;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+/* --- HERO SECTION --- */
+
+#hero-section {
+        position: relative;
+        height: 100vh;
+        background: #000;
+        display: flex;
+        align-items: center;
+        padding: 0 10%;
+    }
+
+.hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    z-index: 10;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    text-transform: uppercase;
+    max-width: 60%;
+    letter-spacing: -2px;
+}
+
+.hero-accent { color: #89CFF0; }
+
+.hero-sidebar {
+    max-width: 380px;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.sidebar-heading {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    border-top: 2px solid #89CFF0;
+    color: #fff;
+    padding-top: 15px;
+}
+
+.sidebar-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #fff;
+    margin-bottom: 2.5rem;
+}
+
+.hero-cta {
+    background: #89CFF0;
+    color: #000;
+    padding: 12px 25px;
+    text-decoration: none;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    transition: 0.3s ease;
+}
+
+#canvas-container {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1;
+    opacity: 0.6; /* Keeps the 3D dots understated */
+}
+
+.hero-sub {
+    pointer-events: auto;
+    margin-top: 2rem;
+}
+
+.btn-accent {
+    background: var(--accent-color);
+    color: #000;
+    padding: 12px 24px;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s;
+}
+
+.btn-accent:hover { transform: scale(1.05); }
+
+/* --- REPORT CARDS (Hover Reveal) --- */
+.reports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 6rem 10%;
+}
+
+.report-card {
+    position: relative;
+    height: 450px;
+    background: var(--card-bg);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* The Hidden Text Layer */
+.report-back {
+    position: absolute;
+    color: #fff;
+    inset: 0;
+    background: var(--bg-color);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 1;
+}
+
+/* The Visible Image Layer */
+.report-front {
+    position: absolute;
+    inset: 0;
+    background: var(--bg-color);
+    transition: transform 0.5s ease;
+    z-index: 2;
+}
+
+.report-card:hover .report-back { opacity: 1; }
+.report-card:hover .report-front { transform: translateY(-100%); }
+
+.placeholder-img {
+    height: 60%;
+    width: 100%;
+    background: linear-gradient(45deg, #0f172a, #1e293b);
+}
+
+/* --- SKILLS SECTION (Sticky Parallax) --- */
+#skills-section {
+    position: relative;
+    min-height: 100vh; /* Make it tall enough to scroll */
+}
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.sticky-text {
+    font-size: 10vw;
+    font-weight: 900;
+    color: #1a1a1a;
+    text-align: center;
+    line-height: 0.9;
+}
+
+.skills-grid-container {
+    position: relative;
+    z-index: 10;    
+    margin-top: 0vh; /* Pull cards up over the sticky text */
+    padding-bottom: 10vh;
+    display: flex;
+    justify-content: center;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.skill-card {
+    background: var(--accent-color);
+    height: 300px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.skill-header-group {
+    transition: transform 0.5s ease;
+}
+
+.skill-desc-group {
+    position: absolute;
+    bottom: 2rem; left: 2rem; right: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+/* Interaction: Header moves UP, Text fades IN */
+.skill-card:hover .skill-header-group { transform: translateY(-150%); }
+.skill-card:hover .skill-desc-group { opacity: 1; transform: translateY(0); }
+
+.skill-title { font-size: 2rem; font-weight: 800; color: #0f172a; line-height: 1; }
+.skill-text { font-size: 1.1rem; color: #1e293b; font-weight: 500; }
+
+footer { background: #121212; padding: 4rem; text-align: center; color: #555; }
