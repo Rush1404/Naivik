@@ -2,7 +2,7 @@
   "name": "Naivik",
   "version": "3.0.4",
   "description": "Company",
-  "main": "/pages/index.html",
+  "main": "index.html",
   "directories": {
     "example": "root"
   },

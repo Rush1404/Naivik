@@ -27,9 +27,10 @@ function compileScss() {
 function serve(done) {
   browserSync.init({
     server: {
-      baseDir: "./"
+      baseDir: ["./pages", "./"]
     },
     port: 3000,
+    open: false,
     notify: false,
     ghostMode: false // Prevents multiple tabs from scrolling together
   });
