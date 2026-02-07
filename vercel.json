@@ -1,8 +1,13 @@
 {
+  "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/pages/:path*"
+      "source": "/(index|accenture|about-us|careers|contact-us|industries|services)",
+      "destination": "/pages/:1.html"
+    },
+    {
+      "source": "/:path((?!assets/).*)",
+      "destination": "/pages/:path.html"
     }
   ]
 }
