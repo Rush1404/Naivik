@@ -227,3 +227,29 @@ body {
 .skill-text { font-size: 1.1rem; color: #1e293b; font-weight: 500; }
 
 footer { background: #121212; padding: 4rem; text-align: center; color: #555; }
+
+/* --- ACCENTURE SIGNATURE FOOTER --- */
+.reinvention-footer {
+    background-color: #0000ff; /* Vibrant high-contrast blue */
+    color: #ffffff;
+    padding: 120px 8%;
+    display: flex;
+    align-items: flex-end;
+    min-height: 400px;
+}
+
+.reinvention-footer h2 {
+    /* Serif font for the signature tagline */
+    font-family: 'Georgia', serif; 
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.1;
+    max-width: 800px;
+}
+
+/* Update the page-wrap to ensure the footer spans full width */
+.footer-container {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
