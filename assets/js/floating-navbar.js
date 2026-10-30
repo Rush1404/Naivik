@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
   const navbarHTML = `
     <nav id="naivik-floating-nav">
-      
+
       <a href="index.html" class="nav-logo-container">
         <span class="material-symbols-rounded main-icon">diamond</span>
       </a>
@@ -12,50 +12,30 @@ document.addEventListener("DOMContentLoaded", function () {
       <ul class="nav-menu">
 
         <li class="nav-item">
-          <a href="#" class="nav-link">
-            <span class="material-symbols-rounded">factory</span> Templates
+          <a href="approach.html" class="nav-link">
+            The Naivik Approach <span class="material-symbols-rounded caret">expand_more</span>
           </a>
           <div class="dropdown-menu-floating">
-            <a href="accenture.html" class="dropdown-item-floating">Accenture Inspired</a>
+            <a href="approach.html" class="dropdown-item-floating">Our Approach</a>
           </div>
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link active"> <span class="material-symbols-rounded">hub</span> Capabilities
+          <a href="our-story.html" class="nav-link">
+            About Us <span class="material-symbols-rounded caret">expand_more</span>
           </a>
           <div class="dropdown-menu-floating">
-            <a href="services.html" class="dropdown-item-floating">System Integration</a>
-            <a href="services.html" class="dropdown-item-floating">Software Services</a>
-            <a href="services.html" class="dropdown-item-floating">Recruitment</a>
+            <a href="our-story.html" class="dropdown-item-floating">Our Story</a>
+            <a href="our-team.html" class="dropdown-item-floating">Our Team</a>
           </div>
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link">
-            <span class="material-symbols-rounded">factory</span> Industries
-          </a>
-          <div class="dropdown-menu-floating">
-            <a href="industries.html" class="dropdown-item-floating">Healthcare</a>
-            <a href="industries.html" class="dropdown-item-floating">Finance & Banking</a>
-            <a href="industries.html" class="dropdown-item-floating">Retail & E-commerce</a>
-            <a href="industries.html" class="dropdown-item-floating">Manufacturing</a>
-          </div>
-        </li>
-
-        <li class="nav-item">
-          <a href="careers.html" class="nav-link">
-            <span class="material-symbols-rounded">group</span> Talent
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a href="about-us.html" class="nav-link">
-            <span class="material-symbols-rounded">diversity_3</span> Team
-          </a>
+          <a href="contact-us.html" class="nav-link">Contact Us</a>
         </li>
 
         <li class="nav-item nav-cta-item">
-          <a href="contact-us.html" class="nav-link nav-cta">
+          <a href="https://calendar.app.google/UyzEpp8WKm4fFmcP6" target="_blank" rel="noopener" class="nav-link nav-cta">
             Book Consultation
           </a>
         </li>
@@ -64,60 +44,46 @@ document.addEventListener("DOMContentLoaded", function () {
     </nav>
   `;
 
+  const footerHTML = `
+    <footer id="naivik-footer">
+      <div class="nf-inner">
+        <div class="nf-cols">
+          <div class="nf-brand">
+            <a href="index.html" class="nf-logo">
+              <span class="material-symbols-rounded">explore</span> NAIVIK
+            </a>
+            <p>Bridging the gap between complex legacy systems and future-ready efficiency.</p>
+          </div>
+          <div class="nf-col">
+            <h6>Company</h6>
+            <a href="about-us.html">About Us</a>
+            <a href="approach.html">The Naivik Approach</a>
+            <a href="contact-us.html">Contact</a>
+          </div>
+          <div class="nf-col">
+            <h6>Solutions</h6>
+            <a href="services.html">AI Agent Development</a>
+            <a href="services.html">Workflow &amp; Systems Optimizarion</a>
+            <a href="services.html">Digital Transformation</a>
+            <a href="careers.html">High-Stakes Recruiting</a>
+          </div>
+        </div>
+        <div class="nf-bottom">
+          <span>&copy; 2026 Naivik Technologies. All rights reserved.</span>
+          <span class="nf-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></span>
+        </div>
+      </div>
+    </footer>
+  `;
+
   document.body.insertAdjacentHTML("afterbegin", navbarHTML);
+  document.body.classList.add("has-naivik-nav");
 
-  const nav = document.getElementById("naivik-floating-nav");
-  let closeTimeout = null;
-  let isLatched = false;
-
-  // Function to open the nav
-  const openNav = () => {
-    // If already open or latched, do nothing
-    if (isLatched || nav.classList.contains("expanded")) return;
-
-    nav.classList.add("expanded");
-    isLatched = true;
-
-    // LATCH: Keep it open for 1.5s regardless of mouse position
-    setTimeout(() => {
-      isLatched = false;
-      
-      // After 1.5s, checks if mouse is NOT over the nav
-      // (We use the :hover CSS selector check as a proxy for cursor position)
-      if (!nav.matches(':hover')) {
-        nav.classList.remove("expanded");
-      }
-    }, 1500);
-  };
-
-  // Function to handle closing
-  const closeNav = () => {
-    // Only close if we are NOT in the 1.5s latched period
-    if (!isLatched) {
-      // Add a tiny buffer so it doesn't snap close if moving between gaps
-      closeTimeout = setTimeout(() => {
-        nav.classList.remove("expanded");
-      }, 100); 
-    }
-  };
-
-  // 1. Mouse enters the nav (or the icon)
-  nav.addEventListener("mouseenter", () => {
-    clearTimeout(closeTimeout); // Cancel any pending close
-    openNav();
-  });
-
-  // 2. Mouse leaves the nav
-  nav.addEventListener("mouseleave", () => {
-    closeNav();
-  });
-  
-  // 3. (Optional) Mobile/Click trigger remains the same
-  const trigger = document.getElementById("navTrigger"); // If you have a specific button
-  if(trigger) {
-      trigger.addEventListener("click", (e) => {
-        e.stopPropagation();
-        nav.classList.toggle("expanded");
-      });
-  }
+  // Replace each page's own footer with the shared one (the Accenture demo keeps its own)
+  const oldFooters = document.querySelectorAll("footer:not(.reinvention-footer)");
+  oldFooters.forEach((f, i) => { if (i > 0) f.remove(); });
+  if (oldFooters.length) oldFooters[0].replaceWith(
+    Object.assign(document.createElement("div"), { innerHTML: footerHTML }).firstElementChild
+  );
+  else if (!document.querySelector(".reinvention-footer")) document.body.insertAdjacentHTML("beforeend", footerHTML);
 });

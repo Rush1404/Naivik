@@ -5,6 +5,7 @@
   --naivik-border: rgba(255, 255, 255, 0.1);
   --naivik-blue: #89CFF0;
   --naivik-accent: #38bdf8;
+  --naivik-gold: #38bdf8;
 }
 
 body {
@@ -245,3 +246,71 @@ p {
   color: #fff !important;
   padding-left: 1.5rem; /* Slight slide effect */
 }
+
+/* ===== NETWORK HERO BACKGROUND (fades into page background) ===== */
+.hero-network {
+  background: url('../img/hero-network.webp') center top / cover no-repeat;
+}
+.hero-network .page-header { background: transparent !important; }
+.hero-network::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 45%;
+  background: linear-gradient(180deg, rgba(11, 15, 25, 0) 0%, var(--naivik-bg) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-network > * { position: relative; z-index: 2; }
+.hero-network::before { z-index: 1; }
+
+/* ===== APPROACH PAGE ===== */
+.approach-bullets { list-style: none; padding: 0; margin: 0; }
+.approach-bullets li { display: flex; gap: 14px; margin-bottom: 16px; color: rgba(255,255,255,0.75); }
+.approach-bullets .material-symbols-rounded { color: var(--naivik-gold); font-size: 22px; margin-top: 2px; }
+.approach-bullets strong, .approach-challenge strong { color: #fff; }
+.approach-visual {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 320px; border-radius: 20px;
+  background: radial-gradient(circle at 30% 20%, rgba(56,189,248,0.18) 0%, rgba(30,41,59,0.4) 60%);
+  border: 1px solid var(--naivik-border);
+}
+.approach-visual .material-symbols-rounded { font-size: 110px; color: var(--naivik-blue); text-shadow: 0 0 40px rgba(137,207,240,0.35); }
+.approach-visual { overflow: hidden; height: 340px; }
+.approach-visual img { width: 100%; height: 100%; object-fit: cover; }
+.approach-kicker { color: var(--naivik-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; }
+
+/* Network hero runs behind the fixed navbar and keeps its label legible */
+body.has-naivik-nav:has(.hero-network) { padding-top: 0; }
+.hero-network .page-header { padding-top: 110px; padding-bottom: 60px; }
+.hero-network h6.text-info { color: var(--naivik-blue) !important; }
+
+
+/* ===== STORY / TEAM PAGES ===== */
+.pill-badge {
+  display: inline-block; padding: 6px 16px; border-radius: 999px;
+  border: 1px solid rgba(56,189,248,0.35); background: rgba(56,189,248,0.08);
+  color: var(--naivik-gold); font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+}
+.photo-placeholder {
+  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px;
+  width: 100%; border-radius: 20px; color: rgba(255,255,255,0.35);
+  background: radial-gradient(circle at 30% 20%, rgba(56,189,248,0.14) 0%, rgba(30,41,59,0.45) 65%);
+  border: 1px dashed rgba(255,255,255,0.18);
+}
+.photo-placeholder .material-symbols-rounded { font-size: 64px; }
+.photo-placeholder span.lbl { font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
+.photo-headshot { aspect-ratio: 4/5; overflow: hidden; border-style: solid; }
+.photo-headshot img { width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 20px; }
+.person-role { color: var(--naivik-accent); font-weight: 600; font-size: 0.95rem; }
+.person-li { color: #0A66C2; font-size: 1.3rem; margin-left: 8px; }
+.person-li:hover { color: #3b8fe0; }
+
+
+/* Always-white secondary button */
+.btn-naivik-white, .btn-naivik-white:hover, .btn-naivik-white:focus {
+  background: #ffffff !important; color: #0B0F19 !important; border: 1px solid #ffffff;
+  border-radius: 50px; font-weight: 600;
+}
+.btn-naivik-white:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255,255,255,0.15); }

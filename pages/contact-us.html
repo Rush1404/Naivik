@@ -158,6 +158,44 @@
         100% { transform: scale(0.9); opacity: 0.6; }
     }
 
+
+    /* --- Booking widget --- */
+    .book-card { border-radius: 24px; border: 1px solid #e2e8f0; background: #f8fafc; }
+    .book-inner { background: #fff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 1.25rem; }
+    .cal-nav-btn, .tz-pill {
+      border: 1px solid #e2e8f0; background: #fff; border-radius: 10px; width: 36px; height: 36px;
+      display: inline-flex; align-items: center; justify-content: center; color: #1e293b; cursor: pointer; padding: 0;
+    }
+    .cal-nav-btn:disabled { opacity: .35; cursor: not-allowed; }
+    .month-pill { background: rgba(137,207,240,.18); color: #1a7fb0; font-weight: 700; font-size: .85rem; border-radius: 10px; padding: 8px 14px; }
+    .day-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+    .day-cell {
+      border: 1px solid #e2e8f0; background: #fff; border-radius: 12px; padding: 8px 0 10px;
+      text-align: center; cursor: pointer; transition: all .2s ease; font-family: inherit;
+    }
+    .day-cell .dow { display: block; font-size: .7rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; }
+    .day-cell .dnum { display: block; font-size: 1.05rem; font-weight: 700; color: #1e293b; margin: 2px 0; }
+    .day-cell .dcount { display: block; font-size: .65rem; color: #64748b; }
+    .day-cell:hover:not(:disabled) { border-color: var(--baby-blue); }
+    .day-cell.active { background: rgba(137,207,240,.22); border-color: var(--baby-blue); }
+    .day-cell.active .dnum { color: #1a7fb0; }
+    .day-cell:disabled { background: #f1f5f9; cursor: not-allowed; opacity: .55; }
+    .slot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 8px; }
+    .slot-btn { border: 1px solid #e2e8f0; background: #fff; border-radius: 10px; padding: 8px 4px; font-size: .85rem; font-weight: 600; color: #1e293b; cursor: pointer; transition: all .2s ease; font-family: inherit; }
+    .slot-btn:hover { border-color: var(--baby-blue); }
+    .slot-btn.active { background: #38bdf8; border-color: #38bdf8; color: #0b0f19; }
+    .avail-badge { background: rgba(34,197,94,.12); color: #15803d; font-size: .72rem; font-weight: 700; border-radius: 999px; padding: 4px 12px; }
+    .day-grid > * { min-width: 0; }
+    @media (max-width: 575px) {
+      .book-inner { padding: .9rem; }
+      .day-grid { gap: 4px; }
+      .day-cell .dcount { display: none; }
+      .day-cell .dow { font-size: .6rem; }
+      .day-cell .dnum { font-size: .95rem; }
+      .slot-grid { grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); }
+    }
+    .dot-b { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 10px; }
+
     /* Ensure typography matches Naivik brand */
     .text-naivik-dark { color: #1e293b; }
     .text-naivik-muted { color: #64748b; }
@@ -198,7 +236,10 @@
         </div>
 
         <div class="col-lg-7 ps-lg-6">
-          <div class="contact-card shadow-xl p-5">
+          <div class="book-card shadow-xl p-3 p-md-5">
+            <h3 class="font-weight-bolder mb-1">Send Us a Message</h3>
+            <p class="text-muted mb-4">Tell us a little about your goals and we'll get back to you by email.</p>
+
             <form id="contact-form">
               <div class="row">
                 <div class="col-md-6 mb-4">
@@ -221,10 +262,13 @@
                 </select>
               </div>
 
-              <div class="mb-5">
+              <div class="mb-4">
                 <label class="form-label font-weight-bold small">How can we help?</label>
-                <textarea name="message" class="form-control" rows="5" placeholder="Tell us about your project or goals..." required></textarea>
+                <textarea name="message_body" id="message-body" class="form-control" rows="4" placeholder="Tell us about your project or goals..." required></textarea>
               </div>
+
+              <input type="hidden" name="to_email" value="manoj.jayaswal@naivik.com">
+              <input type="hidden" name="message" id="message-full">
 
               <div class="text-end">
                 <button type="submit" class="btn btn-naivik shadow-info">
@@ -324,48 +368,43 @@
 
   <script type="text/javascript">
     (function() {
-      // Verified Public Key
-      emailjs.init("L90S_Wf_j0ZGBdOnS");
+      // EmailJS public key
+      emailjs.init("Ane28-aCxQ6BFFizn");
     })();
 
     document.addEventListener('DOMContentLoaded', function() {
       const contactForm = document.getElementById('contact-form');
-      
-      if (contactForm) {
-        contactForm.addEventListener('submit', function(event) {
-          event.preventDefault();
+      if (!contactForm) return;
 
-          const btn = contactForm.querySelector('button');
-          const originalBtnText = btn.innerHTML;
-          
-          // Visual Feedback
-          btn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin ms-2"></i>';
-          btn.disabled = true;
+      // ---- Submit ----
+      contactForm.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-          // Verified IDs from your dashboard
-          const serviceID = 'service_k4g4whc';
-          const templateID = 'template_c5o7y4p';
+        const btn = contactForm.querySelector('button[type="submit"]');
+        const originalBtnText = btn.innerHTML;
+        btn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin ms-2"></i>';
+        btn.disabled = true;
 
-          emailjs.sendForm(serviceID, templateID, contactForm)
-            .then(() => {
-              btn.innerHTML = 'Sent! <i class="fas fa-check ms-2"></i>';
-              btn.classList.add('btn-success');
-              contactForm.reset();
-              
-              setTimeout(() => {
-                btn.innerHTML = originalBtnText;
-                btn.classList.remove('btn-success');
-                btn.disabled = false;
-              }, 5000);
-            })
-            .catch((err) => {
+        document.getElementById('message-full').value = document.getElementById('message-body').value;
+
+        emailjs.sendForm('service_cn0w374', 'template_5c9qiqb', contactForm)
+          .then(() => {
+            btn.innerHTML = 'Sent! <i class="fas fa-check ms-2"></i>';
+            btn.classList.add('btn-success');
+            contactForm.reset();
+            setTimeout(() => {
+              btn.innerHTML = originalBtnText;
+              btn.classList.remove('btn-success');
               btn.disabled = false;
-              btn.innerHTML = 'Error. Try Again';
-              console.error('EmailJS Error Details:', err);
-              alert("Failed to send message. Please check the console for errors.");
-            });
-        });
-      }
+            }, 5000);
+          })
+          .catch((err) => {
+            btn.disabled = false;
+            btn.innerHTML = 'Error. Try Again';
+            console.error('EmailJS Error Details:', err);
+            alert("Failed to send. Please check the console for errors.");
+          });
+      });
     });
   </script>
 
