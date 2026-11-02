@@ -244,18 +244,51 @@ body.has-naivik-nav { padding-top: calc(var(--nav-height) + 48px); }
   body.has-naivik-nav:has(.hero-network) { padding-top: 0; }
 }
 
+/* ===== STARRY NIGHT (site-wide) ===== */
+:root { --naivik-bg: #111d45; }
+body.has-naivik-nav {
+  background: linear-gradient(180deg, #0c1636 0%, #16265a 50%, #22306b 100%) fixed !important;
+}
+body.has-naivik-nav .bg-black { background: transparent !important; }
+body.has-naivik-nav::before, body.has-naivik-nav::after {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background-repeat: repeat;
+}
+body.has-naivik-nav::before {
+  background-image:
+    radial-gradient(1.2px 1.2px at 20px 30px, #fff, transparent),
+    radial-gradient(1px 1px at 90px 80px, rgba(255,255,255,.8), transparent),
+    radial-gradient(1.5px 1.5px at 160px 20px, #fff, transparent),
+    radial-gradient(1px 1px at 230px 110px, rgba(255,255,255,.7), transparent),
+    radial-gradient(1.2px 1.2px at 300px 60px, #fff, transparent),
+    radial-gradient(1px 1px at 55px 120px, rgba(255,255,255,.6), transparent);
+  background-size: 340px 140px;
+}
+body.has-naivik-nav::after {
+  background-image:
+    radial-gradient(2px 2px at 120px 50px, #ffe9a8, transparent),
+    radial-gradient(1.8px 1.8px at 260px 95px, #cfe3ff, transparent),
+    radial-gradient(2px 2px at 40px 90px, #fff, transparent);
+  background-size: 410px 170px;
+  animation: nf-twinkle 4s ease-in-out infinite alternate;
+}
+@media (prefers-reduced-motion: reduce) { body.has-naivik-nav::after { animation: none; } }
+
 /* ===== SHARED FOOTER ===== */
 #naivik-footer {
-  background: #050711;
-  color: #8b93a7;
+  background: rgba(8, 14, 38, 0.55);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  color: #b4bfdc;
+  overflow: hidden;
   font-family: Inter, "Helvetica Neue", Arial, sans-serif;
   padding: 32px 0 20px;
   position: relative;
   z-index: 1;
 }
-#naivik-footer .nf-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-#naivik-footer .nf-cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 28px; }
-#naivik-footer a { color: #8b93a7; text-decoration: none; transition: color .2s; }
+@keyframes nf-twinkle { from { opacity: .25; } to { opacity: 1; } }
+#naivik-footer .nf-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+#naivik-footer .nf-cols { display: grid; grid-template-columns: 1fr auto; gap: 28px; }
+#naivik-footer .nf-col { text-align: right; }
+#naivik-footer a { color: #b4bfdc; text-decoration: none; transition: color .2s; }
 #naivik-footer a:hover { color: #fff; }
 #naivik-footer h6 {
   color: #fff; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
@@ -272,13 +305,13 @@ body.has-naivik-nav { padding-top: calc(var(--nav-height) + 48px); }
 #naivik-footer .nf-bottom {
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
   margin-top: 20px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);
-  font-size: .75rem; color: #5f677c;
+  font-size: .75rem; color: #93a0c4;
 }
-#naivik-footer .nf-legal a { margin-left: 20px; color: #5f677c; }
+#naivik-footer .nf-legal a { margin-left: 20px; color: #93a0c4; }
 #naivik-footer .nf-legal a:hover { color: #fff; }
 
 @media (max-width: 640px) {
-  #naivik-footer .nf-cols { grid-template-columns: 1fr 1fr; }
+  #naivik-footer .nf-cols { grid-template-columns: 1fr; }
   #naivik-footer .nf-brand { grid-column: 1 / -1; }
   #naivik-footer .nf-legal a { margin: 0 16px 0 0; }
 }

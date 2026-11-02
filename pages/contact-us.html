@@ -196,6 +196,21 @@
     }
     .dot-b { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 10px; }
 
+
+    /* --- Starry night: dark theme overrides --- */
+    :root { --text-dark: #f1f5f9; --text-muted: #b4bfdc; }
+    body { background-color: transparent; color: #e2e8f0; }
+    h1, h2, h3, h4, h5, h6 { color: #fff; }
+    .text-muted { color: #b4bfdc !important; }
+    .form-control { background: rgba(8,14,38,.6); color: #fff; border-color: rgba(255,255,255,.18); }
+    .form-control::placeholder { color: #7d8bb3; }
+    .form-control option { color: #1e293b; }
+    .contact-card, .book-card { background: rgba(8,14,38,.55); border-color: rgba(255,255,255,.12); backdrop-filter: blur(6px); }
+    .book-inner, .cal-nav-btn, .tz-pill, .day-cell, .slot-btn { background: rgba(8,14,38,.6); border-color: rgba(255,255,255,.15); color: #e2e8f0; }
+    .day-cell .dnum, .slot-btn { color: #f1f5f9; }
+    .day-cell:disabled { background: rgba(255,255,255,.05); }
+    .month-pill, .day-cell.active .dnum { color: #89CFF0; }
+
     /* Ensure typography matches Naivik brand */
     .text-naivik-dark { color: #1e293b; }
     .text-naivik-muted { color: #64748b; }
@@ -220,17 +235,7 @@
             </div>
             <div>
               <p class="text-xs text-uppercase font-weight-bold text-muted mb-0">Email us at</p>
-              <h5 class="font-weight-bold">manoj.jayaswal@naivik.com</h5>
-            </div>
-          </div>
-
-          <div class="d-flex mb-4">
-            <div class="icon-circle me-3">
-              <span class="material-symbols-rounded">location_on</span>
-            </div>
-            <div>
-              <p class="text-xs text-uppercase font-weight-bold text-muted mb-0">Visit us in</p>
-              <h5 class="font-weight-bold">Markham, ON, Canada</h5>
+              <h5 class="font-weight-bold">info@naivik.com</h5>
             </div>
           </div>
         </div>
@@ -267,7 +272,7 @@
                 <textarea name="message_body" id="message-body" class="form-control" rows="4" placeholder="Tell us about your project or goals..." required></textarea>
               </div>
 
-              <input type="hidden" name="to_email" value="manoj.jayaswal@naivik.com">
+              <input type="hidden" name="to_email" value="info@naivik.com">
               <input type="hidden" name="message" id="message-full">
 
               <div class="text-end">
@@ -313,21 +318,11 @@
           </ul>
         </div>
 
-        <div class="col-6 col-md-3 mb-4 mb-md-0">
-          <h6 class="text-naivik-dark font-weight-bolder text-uppercase mb-3 small">Solutions</h6>
-          <ul class="list-unstyled">
-            <li class="mb-2"><a href="services.html" class="footer-link-light">Naivik Platform</a></li>
-            <li class="mb-2"><a href="services.html" class="footer-link-light">AI Agent Development</a></li>
-            <li class="mb-2"><a href="services.html" class="footer-link-light">IT Strategic Planning</a></li>
-            <li class="mb-2"><a href="services.html" class="footer-link-light">Workflow Automation</a></li>
-          </ul>
-        </div>
-
         <div class="col-md-3">
           <h6 class="text-naivik-dark font-weight-bolder text-uppercase mb-3 small">Get in Touch</h6>
           <p class="text-naivik-muted small mb-2 d-flex align-items-center">
             <span class="material-symbols-rounded text-info me-2 fs-6">mail</span>
-            manoj.jayaswal@naivik.com
+            info@naivik.com
           </p>
           <p class="text-naivik-muted small mb-2 d-flex align-items-center">
             <span class="material-symbols-rounded text-info me-2 fs-6">location_on</span>
