@@ -8,5 +8,17 @@
       "source": "/:path*",
       "destination": "/pages/:path*"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/our-team",
+      "destination": "/our-story#team",
+      "permanent": true
+    },
+    {
+      "source": "/our-team.html",
+      "destination": "/our-story#team",
+      "permanent": true
+    }
   ]
 }
