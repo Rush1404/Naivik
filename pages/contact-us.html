@@ -223,7 +223,7 @@
       <div class="row align-items-center">
         
         <div class="col-lg-5 mb-5 mb-lg-0">
-          <h6 class="text-naivik-blue font-weight-bolder text-uppercase tracking-widest mb-3">Contact Us</h6>
+          <h6 class="text-naivik-blue font-weight-bolder text-uppercase tracking-widest mb-3" style="color:#F2CF6B !important">Contact Us</h6>
           <h1 class="display-4 font-weight-bolder mb-4">Let’s Start a <br>Conversation</h1>
           <p class="text-muted lead mb-5">
             Whether you're looking to modernize your systems with the Naivik platform or need custom enterprise consulting, our team is here to help.
@@ -260,6 +260,7 @@
               <div class="mb-4">
                 <label class="form-label font-weight-bold small">Subject</label>
                 <select name="subject" class="form-control">
+                  <option>Start a Conversation</option>
                   <option>Naivik Platform Inquiry</option>
                   <option>Enterprise Consulting</option>
                   <option>Careers</option>
@@ -270,6 +271,12 @@
               <div class="mb-4">
                 <label class="form-label font-weight-bold small">How can we help?</label>
                 <textarea name="message_body" id="message-body" class="form-control" rows="4" placeholder="Tell us about your project or goals..." required></textarea>
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label font-weight-bold small">Preferred times to connect <span class="text-muted">(optional)</span></label>
+                <input type="text" name="preferred_times" id="preferred-times" class="form-control" placeholder="e.g. Weekday mornings ET, or any Monday / Friday afternoon">
+                <small class="text-muted">Tell us when you're free and we'll confirm a time that works.</small>
               </div>
 
               <input type="hidden" name="to_email" value="info@naivik.com">
@@ -380,7 +387,9 @@
         btn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin ms-2"></i>';
         btn.disabled = true;
 
-        document.getElementById('message-full').value = document.getElementById('message-body').value;
+        const pref = document.getElementById('preferred-times').value.trim();
+        document.getElementById('message-full').value = document.getElementById('message-body').value +
+          (pref ? '\n\nPreferred times to connect: ' + pref : '');
 
         emailjs.sendForm('service_cn0w374', 'template_5c9qiqb', contactForm)
           .then(() => {

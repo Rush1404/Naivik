@@ -1,247 +1,105 @@
 /* assets/css/floating-navbar.css */
+/* Navbar: full-width bar, larger type, Contact Us CTA; mobile = hamburger + side drawer */
 
 :root {
-  /* THEME UPDATE: Switched from Gold/Navy to Black/Baby Blue/Grey */
-  --nav-glass-bg: rgba(10, 10, 10, 0.85); /* Deep Black/Grey */
-  --nav-border: rgba(137, 207, 240, 0.3); /* Baby Blue Border */
-  --nav-accent: #89CFF0; /* Baby Blue */
-  --nav-text: #e2e8f0; /* Light Grey Text */
-  --nav-height: 64px;
-  --nav-width-idle: 64px;
-  --nav-width-expanded: 1000px;
+  --nav-glass-bg: rgba(12, 22, 54, 0.88);
+  --nav-border: rgba(255, 255, 255, 0.16);
+  --nav-accent: #F2CF6B;           /* warm, non-metallic yellow */
+  --nav-text: #eef2ff;
+  --nav-height: 72px;
+  --nav-width: min(1200px, calc(100vw - 32px));
 }
 
-/* MAIN CONTAINER */
 #naivik-floating-nav {
   position: fixed;
-  top: 24px;
-  
-  /* --- IDLE STATE: 7% FROM LEFT --- */
-  left: 7%; 
-  transform: translateX(0);
-  
-  height: var(--nav-height);
-  width: var(--nav-width-idle); 
-  
-  background: var(--nav-glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--nav-border);
-  border-radius: 50px;
-  
-  z-index: 9999;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Slightly darker shadow */
-  
-  /* --- TRANSITION LOGIC --- */
-  transition: 
-    width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), 
-    left 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
-    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
-    background 0.3s;
-  
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-  
-  overflow: visible; 
-  justify-content: flex-start;
-}
-
-/* HOVER STATE (Expanded & Centered) */
-#naivik-floating-nav.expanded {
-  width: var(--nav-width-expanded);
+  top: 16px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(10, 10, 10, 0.95); /* Nearly Opaque Black */
-  border-color: var(--nav-accent); /* Active Blue Border */
+  width: var(--nav-width);
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  padding: 0 20px 0 24px;
+  background: var(--nav-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--nav-border);
+  border-radius: 16px;
+  box-shadow: 0 12px 36px rgba(4, 8, 24, 0.45);
+  z-index: 9999;
 }
 
-/* Ensure content shows when expanded class is present */
-#naivik-floating-nav.expanded .nav-menu {
-  opacity: 1;
-  pointer-events: all;
-  transform: translateX(0);
-  transition-delay: 0.1s;
-}
-
-#naivik-floating-nav.expanded .main-icon {
-  transform: scale(1.1);
-  color: var(--nav-accent); /* Icon turns blue when open */
-}
-
-/* 1. THE LOGO ICON (Left Aligned) */
 .nav-logo-container {
-  min-width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 20px;
-  flex-shrink: 0;
-  text-decoration: none; /* Fix for anchor tag wrapper */
+  display: flex; align-items: center; gap: 12px;
+  color: #fff; text-decoration: none; flex-shrink: 0; margin-right: 32px;
 }
+.nav-logo-container:hover { color: #fff; }
+.main-icon { width: 34px; height: 34px; filter: drop-shadow(0 0 10px rgba(242, 207, 107, 0.35)); }
+.nav-wordmark { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.22em; }
 
-.main-icon {
-  font-size: 28px;
-  color: var(--nav-accent); /* Default Blue */
-  text-shadow: 0 0 15px rgba(137, 207, 240, 0.4);
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-#naivik-floating-nav:hover .main-icon {
-  transform: scale(1.1);
-}
-
-/* 2. THE NAV LINKS ROW */
 .nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  flex: 1;
-  
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  white-space: nowrap; 
+  display: flex; align-items: center; gap: 6px; flex: 1;
+  list-style: none; margin: 0; padding: 0; white-space: nowrap;
 }
-
-/* LINK ITEMS */
-.nav-item {
-  position: relative;
-}
+.nav-item { position: relative; }
 
 .nav-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 30px;
-  color: var(--nav-text);
-  text-decoration: none;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition: all 0.2s ease;
+  display: flex; align-items: center; gap: 6px;
+  padding: 12px 20px; border-radius: 10px;
+  color: var(--nav-text); text-decoration: none;
+  font-size: 1rem; font-weight: 600; letter-spacing: 0.02em;
+  transition: color .2s ease, background .2s ease;
 }
+.nav-link:hover { color: var(--nav-accent); background: rgba(255,255,255,0.06); }
+.nav-link.active { color: var(--nav-accent); }
 
-.nav-link span { font-size: 18px; color: #64748b; transition: 0.2s; } /* Grey Icons */
-
-/* Hover Effect */
-.nav-link:hover {
-  color: #fff;
-}
-.nav-link:hover span { color: var(--nav-accent); }
-
-/* Active State */
-.nav-link.active {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-.nav-link.active span { color: var(--nav-accent); }
-
-
-/* --- DROPDOWNS --- */
-.dropdown-menu-floating {
-  position: absolute;
-  top: 100%; 
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  background: #000000; /* Pure Black Background */
-  border: 1px solid var(--nav-border);
-  border-radius: 12px;
-  padding: 10px;
-  min-width: 220px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-  
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.2s ease;
-  z-index: 10000;
-}
-
-/* Invisible Bridge */
-.dropdown-menu-floating::before {
-  content: "";
-  position: absolute;
-  top: -20px;
-  left: 0;
-  right: 0;
-  height: 25px;
-  background: transparent;
-  display: block;
-}
-
-/* Show Dropdown on Li Hover */
-.nav-item:hover .dropdown-menu-floating {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(10px);
-}
-
-.dropdown-item-floating {
-  display: block;
-  padding: 10px 15px;
-  color: #9ca3af; /* Muted text */
-  text-decoration: none;
-  font-size: 0.85rem;
-  border-radius: 8px;
-  transition: 0.2s;
-}
-
-.dropdown-item-floating:hover {
-  background: rgba(137, 207, 240, 0.1); /* Subtle Blue BG */
-  color: var(--nav-accent);
-  padding-left: 20px;
-}
-
-/* CTA BUTTON */
 .nav-cta-item { margin-left: auto; }
-
 .nav-cta {
-  background: var(--nav-accent);
-  color: #000 !important; /* Black text for contrast */
-  font-weight: 800;
-  box-shadow: 0 0 15px rgba(137, 207, 240, 0.3);
+  background: var(--nav-accent); color: #14204a !important; font-weight: 700;
+  padding: 12px 26px; box-shadow: 0 4px 16px rgba(242, 207, 107, 0.25);
 }
-.nav-cta:hover {
-  background: #fff;
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-}
+.nav-cta:hover { background: #f7dd8f; color: #14204a !important; transform: translateY(-1px); }
 
-/* ===== STATIC NAVBAR OVERRIDES (always open) ===== */
-:root { --nav-width-expanded: min(1000px, calc(100vw - 24px)); }
+/* Hamburger + drawer (hidden on desktop) */
+.nav-toggle {
+  display: none; margin-left: auto; width: 46px; height: 46px; border-radius: 12px;
+  background: transparent; border: 1px solid var(--nav-border); color: #fff; cursor: pointer;
+  align-items: center; justify-content: center; padding: 0;
+}
+.nav-toggle span { display: block; width: 20px; height: 2px; background: currentColor; position: relative; border-radius: 2px; }
+.nav-toggle span::before, .nav-toggle span::after {
+  content: ""; position: absolute; left: 0; width: 20px; height: 2px; background: currentColor; border-radius: 2px;
+}
+.nav-toggle span::before { top: -6px; }
+.nav-toggle span::after { top: 6px; }
+.nav-overlay {
+  position: fixed; inset: 0; background: rgba(4, 8, 24, 0.6); z-index: 9998;
+  opacity: 0; pointer-events: none; transition: opacity .3s ease;
+}
+body.nav-open .nav-overlay { opacity: 1; pointer-events: all; }
 
-#naivik-floating-nav {
-  left: 50%;
-  transform: translateX(-50%);
-  width: var(--nav-width-expanded);
-  background: rgba(10, 10, 10, 0.95);
-  border-color: var(--nav-accent);
-}
-#naivik-floating-nav .nav-menu {
-  opacity: 1;
-  pointer-events: all;
-  transform: none;
-}
-body.has-naivik-nav { padding-top: calc(var(--nav-height) + 48px); }
-.nav-link .caret { font-size: 18px; margin-left: -4px; color: #64748b; }
-.nav-item:hover .caret { color: var(--nav-accent); }
+body.has-naivik-nav { padding-top: calc(var(--nav-height) + 32px); }
 
 @media (max-width: 900px) {
-  #naivik-floating-nav { height: auto; padding: 8px; border-radius: 28px; top: 12px; }
-  .nav-logo-container { display: none; }
-  .nav-menu { flex-wrap: wrap; justify-content: center; gap: 2px; }
-  .nav-cta-item { margin-left: 0; }
-  .nav-link { padding: 8px 10px; font-size: 0.68rem; gap: 2px; }
-  body.has-naivik-nav { padding-top: 150px; }
-  body.has-naivik-nav:has(.hero-network) { padding-top: 0; }
+  :root { --nav-height: 64px; }
+  /* transform/backdrop-filter would trap the fixed drawer inside the bar, so drop them on mobile */
+  #naivik-floating-nav { top: 10px; left: 10px; right: 10px; width: auto; transform: none; backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(12, 22, 54, 0.96); padding: 0 12px 0 16px; }
+  .nav-logo-container { margin-right: 0; }
+  .nav-toggle { display: inline-flex; }
+  .nav-menu {
+    position: fixed; top: 0; right: 0; bottom: 0; width: min(320px, 82vw);
+    flex-direction: column; align-items: stretch; gap: 4px;
+    padding: 88px 20px 24px; background: #0f1a42; border-left: 1px solid var(--nav-border);
+    transform: translateX(100%); transition: transform .3s ease; z-index: 9999; overflow-y: auto;
+  }
+  body.nav-open .nav-menu { transform: translateX(0); }
+  .nav-link { font-size: 1.1rem; padding: 14px 16px; }
+  .nav-cta-item { margin: 12px 0 0; }
+  .nav-cta { justify-content: center; }
+  body.has-naivik-nav { padding-top: 0; }
+  body.nav-open { overflow: hidden; }
+  /* keep the toggle above the drawer so it can close it */
+  .nav-toggle { position: relative; z-index: 10001; }
 }
 
 /* ===== STARRY NIGHT (site-wide) ===== */
@@ -300,7 +158,7 @@ body.has-naivik-nav::after {
   color: #fff; font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;
 }
 #naivik-footer .nf-logo:hover { color: #fff; }
-#naivik-footer .nf-logo .material-symbols-rounded { color: #38bdf8; font-size: 22px; }
+#naivik-footer .nf-logo svg { width: 26px; height: 26px; }
 #naivik-footer .nf-brand p { font-size: 0.82rem; line-height: 1.5; max-width: 300px; margin: 0; }
 #naivik-footer .nf-bottom {
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;

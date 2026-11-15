@@ -5,7 +5,8 @@
   --naivik-border: rgba(255, 255, 255, 0.1);
   --naivik-blue: #89CFF0;
   --naivik-accent: #38bdf8;
-  --naivik-gold: #38bdf8;
+  --naivik-gold: #F2CF6B;   /* warm, non-metallic yellow (replaces gold) */
+  --naivik-yellow: #F2CF6B;
 }
 
 body {
@@ -208,22 +209,23 @@ p {
 }
 
 .btn-naivik-accent {
-  background: linear-gradient(135deg, #89CFF0 0%, #38bdf8 100%);
-  color: #000 !important;
+  background: var(--naivik-yellow);
+  color: #14204a !important;
   border: none;
   border-radius: 50px;
   padding: 12px 35px;
-  font-weight: 600;
-  box-shadow: 0 4px 15px rgba(137, 207, 240, 0.3);
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(242, 207, 107, 0.25);
 }
 
 .btn-naivik-accent:hover {
+  background: #f7dd8f;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(137, 207, 240, 0.5);
+  box-shadow: 0 8px 25px rgba(242, 207, 107, 0.4);
 }
 
 .text-gradient-blue {
-  background: linear-gradient(to right, #89CFF0, #ffffff);
+  background: linear-gradient(to right, #F2CF6B, #f9e7ae);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -314,3 +316,49 @@ body.has-naivik-nav:has(.hero-network) { padding-top: 0; }
   border-radius: 50px; font-weight: 600;
 }
 .btn-naivik-white:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255,255,255,0.15); }
+
+
+/* ===== WARM YELLOW ACCENT (kickers, icons, emphasis) ===== */
+h6.text-info, .hero-network h6.text-info { color: var(--naivik-yellow) !important; }
+.icon-box { background: rgba(242, 207, 107, 0.12); color: var(--naivik-yellow); }
+.glass-card:hover { border-color: rgba(242, 207, 107, 0.55); }
+
+/* ===== LANDING: big single tagline ===== */
+.hero-tagline { font-size: clamp(2.6rem, 7vw, 5.2rem); line-height: 1.05; font-weight: 800; letter-spacing: -0.03em; }
+
+/* ===== APPROACH PAGE (distinct from landing: blueprint grid, seats rail, lifecycle ruler, full-width cases) ===== */
+.approach-page {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.ap-head { padding: 40px 0 56px; }
+.ap-head h1 { font-size: clamp(2.2rem, 4.6vw, 3.6rem); line-height: 1.1; }
+.ap-seats { list-style: none; margin: 0; padding: 0; border-left: 2px solid rgba(242,207,107,.5); }
+.ap-seats li { padding: 10px 0 10px 20px; position: relative; color: #fff; font-weight: 600; font-size: 1.05rem; }
+.ap-seats li small { display: block; font-weight: 300; color: rgba(255,255,255,.65); font-size: .85rem; }
+.ap-seats li::before { content: ""; position: absolute; left: -7px; top: 18px; width: 12px; height: 12px; border-radius: 50%; background: var(--naivik-yellow); }
+.ap-ruler { display: flex; align-items: flex-start; margin: 8px 0 64px; }
+.ap-ruler .step { flex: 1; position: relative; padding-top: 28px; color: #fff; font-weight: 600; }
+.ap-ruler .step::before { content: ""; position: absolute; top: 6px; left: 0; width: 14px; height: 14px; border-radius: 50%; background: var(--naivik-yellow); z-index: 1; }
+.ap-ruler .step::after { content: ""; position: absolute; top: 12px; left: 14px; right: 0; height: 2px; background: rgba(242,207,107,.35); }
+.ap-ruler .step:last-child::after { display: none; }
+.ap-ruler .step small { display: block; font-weight: 300; color: rgba(255,255,255,.65); }
+.ap-num { font-size: 4.5rem; font-weight: 800; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(242,207,107,.7); margin-bottom: 8px; }
+.approach-visual { border-top: 3px solid var(--naivik-yellow); }
+.case-row { display: grid; grid-template-columns: 240px 1fr; gap: 40px; padding: 36px 0; border-top: 1px solid rgba(255,255,255,.14); }
+.case-row:last-child { border-bottom: 1px solid rgba(255,255,255,.14); }
+.case-row h4 { margin-bottom: 12px; }
+.case-row p { max-width: 900px; }
+@media (max-width: 767px) {
+  .ap-ruler { flex-direction: column; margin-bottom: 40px; }
+  .ap-ruler .step { padding: 0 0 22px 32px; }
+  .ap-ruler .step::before { top: 4px; }
+  .ap-ruler .step::after { top: 20px; left: 6px; right: auto; width: 2px; height: calc(100% - 14px); }
+  .case-row { grid-template-columns: 1fr; gap: 12px; }
+}
+
+/* ===== ABOUT US (story + team combined) ===== */
+.about-anchor-nav a { color: rgba(255,255,255,.75); text-decoration: none; margin-right: 24px; font-weight: 600; }
+.about-anchor-nav a:hover { color: var(--naivik-yellow); }

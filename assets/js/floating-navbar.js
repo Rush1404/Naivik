@@ -1,40 +1,24 @@
-/* assets/js/floating-navbar.js */
+// assets/js/floating-navbar.js
+// Shared navbar + footer. North Star mark = assets/img/north-star/option-1-polaris.svg (swap here to change the logo).
 
 document.addEventListener("DOMContentLoaded", function () {
-  
+
+  const northStar = `<svg class="main-icon" viewBox="0 0 64 64" fill="none" aria-hidden="true"><circle cx="32" cy="32" r="27" stroke="#F2CF6B" stroke-opacity=".45" stroke-width="1.5"/><path fill="#F2CF6B" d="M32 4C34 22 42 30 60 32C42 34 34 42 32 60C30 42 22 34 4 32C22 30 30 22 32 4Z"/></svg>`;
+
+  const here = location.pathname.split("/").pop().replace(/\.html$/, "") || "index";
+  const active = (name) => (here === name ? " active" : "");
+
   const navbarHTML = `
-    <nav id="naivik-floating-nav">
-
-      <a href="index.html" class="nav-logo-container">
-        <svg class="main-icon main-icon-ship" viewBox="0 0 32 32" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-label="Naivik"><path d="M16 3v17"/><path d="M16 4c5 3 8 8 8 14H16"/><path d="M16 8c-3 2-5 6-5 10h5"/><path d="M4 21h24l-4 6H8z"/><path d="M2 30c3-1.5 5-1.5 7 0s4 1.500 7 0 5-1.500 7 0 4 1.500 7 0"/></svg>
+    <div class="nav-overlay"></div>
+    <nav id="naivik-floating-nav" aria-label="Main">
+      <a href="index.html" class="nav-logo-container" aria-label="Naivik home">
+        ${northStar}<span class="nav-wordmark">NAIVIK</span>
       </a>
-
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
       <ul class="nav-menu">
-
-        <li class="nav-item">
-          <a href="approach.html" class="nav-link">The Naivik Approach</a>
-        </li>
-
-        <li class="nav-item">
-          <a href="our-story.html" class="nav-link">
-            About Us <span class="material-symbols-rounded caret">expand_more</span>
-          </a>
-          <div class="dropdown-menu-floating">
-            <a href="our-story.html" class="dropdown-item-floating">Our Story</a>
-            <a href="our-team.html" class="dropdown-item-floating">Our Team</a>
-          </div>
-        </li>
-
-        <li class="nav-item">
-          <a href="contact-us.html" class="nav-link">Contact Us</a>
-        </li>
-
-        <li class="nav-item nav-cta-item">
-          <a href="https://calendar.app.google/UyzEpp8WKm4fFmcP6" target="_blank" rel="noopener" class="nav-link nav-cta">
-            Book Consultation
-          </a>
-        </li>
-
+        <li class="nav-item"><a href="approach.html" class="nav-link${active("approach")}">The Naivik Approach</a></li>
+        <li class="nav-item"><a href="our-story.html" class="nav-link${active("our-story")}">About Us</a></li>
+        <li class="nav-item nav-cta-item"><a href="contact-us.html" class="nav-link nav-cta">Contact Us</a></li>
       </ul>
     </nav>
   `;
@@ -44,16 +28,14 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="nf-inner">
         <div class="nf-cols">
           <div class="nf-brand">
-            <a href="index.html" class="nf-logo">
-              <span class="material-symbols-rounded">explore</span> NAIVIK
-            </a>
+            <a href="index.html" class="nf-logo">${northStar} NAIVIK</a>
             <p>Bridging the gap between complex legacy systems and future-ready efficiency.</p>
           </div>
           <div class="nf-col">
             <h6>Company</h6>
-            <a href="about-us.html">About Us</a>
+            <a href="our-story.html">About Us</a>
             <a href="approach.html">The Naivik Approach</a>
-            <a href="contact-us.html">Contact</a>
+            <a href="contact-us.html">Contact Us</a>
           </div>
         </div>
         <div class="nf-bottom">
@@ -64,10 +46,25 @@ document.addEventListener("DOMContentLoaded", function () {
     </footer>
   `;
 
+  document.head.insertAdjacentHTML("beforeend",
+    '<link rel="icon" type="image/svg+xml" href="../assets/img/north-star/option-1-polaris.svg">');
+
   document.body.insertAdjacentHTML("afterbegin", navbarHTML);
   document.body.classList.add("has-naivik-nav");
 
-  // Replace each page's own footer with the shared one (the Accenture demo keeps its own)
+  // Mobile drawer
+  const toggle = document.querySelector(".nav-toggle");
+  const setOpen = (open) => {
+    document.body.classList.toggle("nav-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  };
+  toggle.addEventListener("click", () => setOpen(!document.body.classList.contains("nav-open")));
+  document.querySelector(".nav-overlay").addEventListener("click", () => setOpen(false));
+  document.querySelectorAll(".nav-menu a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
+
+  // Replace each page's own footer with the shared one
   const oldFooters = document.querySelectorAll("footer:not(.reinvention-footer)");
   oldFooters.forEach((f, i) => { if (i > 0) f.remove(); });
   if (oldFooters.length) oldFooters[0].replaceWith(
